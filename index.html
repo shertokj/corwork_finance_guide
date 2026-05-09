@@ -2785,7 +2785,7 @@ Step 5 — Draft the outreach email. Using the Outreach Voice skill, draft a fou
 
   <p>The mechanism is simple: at the end of each week, Claude exports your key data files from Google Drive as CSV files and commits them to a private subdirectory in your GitHub repository. Each commit is timestamped and carries a message describing the state of the pipeline that week. Over time, this creates a complete, searchable history of your coverage practice — every contact added, every status change, every outreach campaign — recoverable to any point in time.</p>
 
-  <p>The backup repository should be <strong>private</strong>. Contact names, email addresses, and relationship notes are personal data; they should not be publicly accessible on a GitHub Pages site. This is a separate repository from the one used for publishing analysis pages, or a private subdirectory that is excluded from the Pages deployment via a <code>.gitignore</code> configuration — Claude will set this up correctly when you run the initialization routine below.</p>
+  <p>The backup repository should be <strong>private</strong>. Contact names, email addresses, and relationship notes are personal data; they should not be publicly accessible on a GitHub Pages site. This is a separate repository from the one used for publishing analysis pages, or a private subdirectory that is excluded from the Pages deployment via a <code>.gitignore</code> configuration; Claude will set this up correctly when you run the initialization routine below.</p>
 
   <!-- BACKUP ROUTINE -->
   <div class="routine-card">
@@ -2833,7 +2833,7 @@ Pull the pipeline summary numbers from master-coverage.sheet before committing s
         <span class="trigger-tag">Google Drive</span>
         <span class="trigger-tag">Google Sheets</span>
       </div>
-      <p>Retrieves a specific historical version of the coverage data from GitHub and restores it to a new Drive sheet for review — without overwriting the current live sheet. Used when a routine has introduced an error, a contact record needs to be recovered, or you want to compare the pipeline against a prior state.</p>
+      <p>Retrieves a specific historical version of the coverage data from GitHub and restores it to a new Drive sheet for review, without overwriting the current live sheet. Used when a routine has introduced an error, a contact record needs to be recovered, or you want to compare the pipeline against a prior state.</p>
       <div class="prompt-block">
         <div class="prompt-label">→ Restore Routine Prompt</div>
         <p>Restore a prior coverage snapshot from GitHub. I want to retrieve the contacts backup from [date or approximate date — e.g., "the first Friday of March 2026" or a specific commit SHA if I have it].
@@ -2897,13 +2897,13 @@ Authentication: Use the GitHub credentials stored in project context. Never log,
 
   <h3>How This Changes Your Prospect Outreach</h3>
 
-  <p>The practical effect of combining Cowork, weekly analysis pages, and GitHub Pages is that your outreach emails shift from generic introductions to delivery vehicles for specific, timely research. An email that says "I wanted to introduce myself and discuss your cash investment needs" competes with every other coverage email in your prospect's inbox. An email that says "I published this week's rate brief with a note on [their firm]'s CP issuance position in the current spread environment — link below" does not have many competitors.</p>
+  <p>The practical effect of combining Cowork, weekly analysis pages, and GitHub Pages is that your outreach emails shift from generic introductions to delivery vehicles for specific, timely research. An email that says "I wanted to introduce myself and discuss your cash investment needs" competes with every other coverage email in your prospect's inbox. An email that says "I published this week's rate brief with a note on [their firm]'s CP issuance position in the current spread environment, link below" does not have many competitors.</p>
 
   <p>The setup cost is a one-time 20-minute configuration. The ongoing cost is the time Claude spends generating and publishing the analysis: roughly 15–20 minutes of automated work every Friday afternoon, producing an asset that serves every active coverage relationship simultaneously. Each prospect who receives a link to their own firm-specific page gets something that took Claude 20 minutes to produce but reads as if you spent an afternoon on it.</p>
 
   <div class="callout callout-info">
     <div class="callout-title">The Index Page</div>
-    <p>Once you have published several weekly briefs, consider asking Claude to generate an index page — a clean landing page at the root of your GitHub Pages site that lists all published briefs in reverse chronological order, with a one-line headline for each. This gives prospects who revisit the URL a library of your prior analysis rather than a single dated page. Claude can regenerate this index automatically as part of the weekly publish routine: "After pushing the weekly brief, regenerate index.html at the repository root to include this week's brief in the list of published analysis pages."</p>
+    <p>Once you have published several weekly briefs, consider asking Claude to generate an index page: a clean landing page at the root of your GitHub Pages site that lists all published briefs in reverse chronological order, with a one-line headline for each. This gives prospects who revisit the URL a library of your prior analysis rather than a single dated page. Claude can regenerate this index automatically as part of the weekly publish routine: "After pushing the weekly brief, regenerate index.html at the repository root to include this week's brief in the list of published analysis pages."</p>
   </div>
 
   <div class="callout callout-tip">
