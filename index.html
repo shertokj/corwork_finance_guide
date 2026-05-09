@@ -1,0 +1,2107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Cowork — Finance Prospecting Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0f0e;
+    --paper: #f5f2ec;
+    --cream: #ede9e0;
+    --gold: #c8a84b;
+    --gold-light: #e8d49a;
+    --rust: #8b3a2a;
+    --slate: #3d4a5c;
+    --muted: #8a8578;
+    --rule: #d4cfc4;
+    --code-bg: #1a1a18;
+    --code-fg: #e8d49a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ─── HEADER ─── */
+  .masthead {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 72px 48px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .masthead::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,168,75,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .masthead-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .masthead-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 28px; height: 1px;
+    background: var(--gold);
+  }
+  .masthead h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(36px, 5vw, 58px);
+    line-height: 1.08;
+    font-weight: 400;
+    max-width: 720px;
+    margin-bottom: 24px;
+  }
+  .masthead h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+  .masthead-sub {
+    font-size: 15px;
+    color: rgba(245,242,236,0.65);
+    font-weight: 300;
+    max-width: 560px;
+    line-height: 1.6;
+  }
+  .masthead-meta {
+    margin-top: 40px;
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .meta-pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    border: 1px solid rgba(200,168,75,0.35);
+    padding: 5px 12px;
+    border-radius: 2px;
+  }
+
+  /* ─── NAV ─── */
+  .toc-bar {
+    background: var(--cream);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 48px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    overflow-x: auto;
+  }
+  .toc-bar a {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 14px 16px;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .toc-bar a:hover { color: var(--ink); border-bottom-color: var(--gold); }
+
+  /* ─── LAYOUT ─── */
+  .body-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 72px 48px 120px;
+  }
+
+  /* ─── SECTION HEADERS ─── */
+  .part-header {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin: 72px 0 36px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .part-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    white-space: nowrap;
+  }
+  .part-header h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--ink);
+  }
+
+  h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--slate);
+    margin: 44px 0 14px;
+  }
+
+  p { margin-bottom: 16px; color: #2a2822; }
+
+  /* ─── COMPONENT STACK DIAGRAM ─── */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin: 32px 0;
+  }
+  .stack-card {
+    background: var(--paper);
+    padding: 24px 22px;
+    transition: background 0.2s;
+  }
+  .stack-card:hover { background: var(--cream); }
+  .stack-card-icon {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  .stack-card-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .stack-card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 8px;
+  }
+  .stack-card p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* ─── STEPS ─── */
+  .steps { counter-reset: step; margin: 28px 0; }
+  .step {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 36px;
+    counter-increment: step;
+  }
+  .step-num {
+    flex-shrink: 0;
+    width: 36px; height: 36px;
+    background: var(--ink);
+    color: var(--gold);
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+  }
+  .step-num::before { content: counter(step, decimal-leading-zero); }
+  .step-body { flex: 1; }
+  .step-body strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: var(--ink);
+  }
+  .step-body p { font-size: 14px; color: #4a4640; margin-bottom: 10px; }
+
+  /* ─── CONNECTOR TAGS ─── */
+  .connector-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 14px 0;
+  }
+  .connector-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    padding: 5px 12px;
+    border-radius: 2px;
+    letter-spacing: 0.06em;
+    border: 1px solid;
+  }
+  .tag-data   { border-color: #3d4a5c; color: #3d4a5c; background: rgba(61,74,92,0.06); }
+  .tag-crm    { border-color: #8b3a2a; color: #8b3a2a; background: rgba(139,58,42,0.06); }
+  .tag-comms  { border-color: #2a6b4a; color: #2a6b4a; background: rgba(42,107,74,0.06); }
+  .tag-enrich { border-color: #6b4a2a; color: #6b4a2a; background: rgba(107,74,42,0.06); }
+
+  /* ─── TERMINAL PROMPT BLOCKS ─── */
+  .prompt-block {
+    background: #0d0d0b;
+    border-radius: 8px;
+    margin: 20px 0 28px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  }
+  .prompt-titlebar {
+    background: #1e1e1b;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid #2e2e2a;
+  }
+  .prompt-dots {
+    display: flex;
+    gap: 6px;
+  }
+  .prompt-dots span {
+    width: 11px; height: 11px;
+    border-radius: 50%;
+    display: block;
+  }
+  .prompt-dots .dot-red   { background: #ff5f57; }
+  .prompt-dots .dot-yel   { background: #febc2e; }
+  .prompt-dots .dot-grn   { background: #28c840; }
+  .prompt-tab {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.06em;
+    flex: 1;
+    text-align: center;
+    margin-right: 80px;
+  }
+  .prompt-copy-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: rgba(200,168,75,0.15);
+    color: var(--gold);
+    border: 1px solid rgba(200,168,75,0.35);
+    border-radius: 3px;
+    padding: 4px 12px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+  .prompt-copy-btn:hover {
+    background: rgba(200,168,75,0.28);
+    color: #f0d070;
+  }
+  .prompt-copy-btn.copied {
+    background: rgba(40,200,64,0.15);
+    color: #28c840;
+    border-color: rgba(40,200,64,0.35);
+  }
+  .prompt-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    opacity: 0.8;
+  }
+  .prompt-content {
+    padding: 22px 28px 24px;
+  }
+  .prompt-block p, .prompt-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: #f0ece4;
+    line-height: 1.75;
+    margin: 0;
+    white-space: pre-wrap;
+    display: inline;
+  }
+
+  /* ─── WORKFLOWS ─── */
+  .workflow-header {
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    border-radius: 4px 4px 0 0;
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 44px;
+  }
+  .workflow-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    background: var(--ink);
+    padding: 4px 10px;
+    border-radius: 2px;
+    letter-spacing: 0.1em;
+  }
+  .workflow-header h3 {
+    margin: 0;
+    font-size: 18px;
+    color: var(--ink);
+  }
+  .workflow-body {
+    border: 1px solid var(--rule);
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    padding: 28px 24px;
+    margin-bottom: 8px;
+  }
+  .replaces-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .replaces-badge::before {
+    content: '↩';
+    color: var(--gold);
+  }
+
+  /* ─── PRICING TABLE ─── */
+  .pricing-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 14px;
+  }
+  .pricing-table th {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--rule);
+    background: var(--cream);
+  }
+  .pricing-table td {
+    padding: 13px 16px;
+    border-bottom: 1px solid var(--rule);
+    color: #2a2822;
+  }
+  .pricing-table tr:last-child td { border-bottom: none; }
+  .pricing-table tr:hover td { background: var(--cream); }
+  .pricing-table td:first-child { font-weight: 400; }
+  .pricing-table td.cost {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--slate);
+  }
+  .pricing-table td.included {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: #2a6b4a;
+    letter-spacing: 0.06em;
+  }
+
+  /* ─── CALLOUT BOXES ─── */
+  .callout {
+    border-radius: 4px;
+    padding: 20px 24px;
+    margin: 24px 0;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .callout p { margin: 0; }
+  .callout-warn {
+    background: rgba(139,58,42,0.07);
+    border-left: 3px solid var(--rust);
+  }
+  .callout-warn .callout-title { color: var(--rust); }
+  .callout-info {
+    background: rgba(61,74,92,0.07);
+    border-left: 3px solid var(--slate);
+  }
+  .callout-info .callout-title { color: var(--slate); }
+  .callout-tip {
+    background: rgba(200,168,75,0.08);
+    border-left: 3px solid var(--gold);
+  }
+  .callout-tip .callout-title { color: #9a7828; }
+  .callout-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  /* ─── FIRST TASK HIGHLIGHT ─── */
+  .first-task {
+    background: var(--ink);
+    border-radius: 6px;
+    padding: 36px 40px;
+    margin: 32px 0;
+  }
+  .first-task .ft-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .first-task p {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: #f0ece4;
+    line-height: 1.75;
+    margin: 0;
+  }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    background: var(--cream);
+    border-top: 1px solid var(--rule);
+    padding: 36px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-left {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+  .footer-right {
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .footer-right a { color: var(--slate); text-decoration: none; }
+  .footer-right a:hover { text-decoration: underline; }
+
+  /* ─── DIVIDER ─── */
+  .rule { border: none; border-top: 1px solid var(--rule); margin: 48px 0; }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .masthead h1 { animation: fadeUp 0.6s ease both; }
+  .masthead-sub { animation: fadeUp 0.6s 0.1s ease both; }
+  .masthead-meta { animation: fadeUp 0.6s 0.2s ease both; }
+
+  /* ─── APPENDIX ─── */
+  .appendix-divider {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 56px 48px 48px;
+    margin-top: 80px;
+  }
+  .appendix-divider-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .appendix-divider-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 28px; height: 1px;
+    background: var(--gold);
+  }
+  .appendix-divider h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(26px, 3.5vw, 40px);
+    font-weight: 400;
+    line-height: 1.1;
+    max-width: 600px;
+    margin-bottom: 16px;
+    color: var(--paper);
+  }
+  .appendix-divider h2 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+  .appendix-divider p {
+    font-size: 14px;
+    color: rgba(245,242,236,0.6);
+    max-width: 520px;
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .appendix-body {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 64px 48px 80px;
+  }
+
+  /* ─── SKILL CARDS ─── */
+  .skill-card {
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    margin: 36px 0;
+    overflow: hidden;
+  }
+  .skill-card-header {
+    background: var(--cream);
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .skill-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--gold);
+    padding: 4px 10px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+  .skill-card-header h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--ink);
+    margin: 0;
+  }
+  .skill-card-body {
+    padding: 24px 28px;
+  }
+  .skill-card-body p {
+    font-size: 14px;
+    color: #3a3630;
+    margin-bottom: 18px;
+    line-height: 1.65;
+  }
+  .skill-card-body p:last-of-type { margin-bottom: 0; }
+  .skill-meta-row {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .skill-meta-item {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+  .skill-meta-item strong {
+    color: var(--slate);
+    font-weight: 500;
+    display: block;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+
+  /* ─── ROUTINE CARDS ─── */
+  .routine-card {
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    margin: 36px 0;
+    overflow: hidden;
+  }
+  .routine-header {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 24px;
+    background: var(--cream);
+    border-bottom: 1px solid var(--rule);
+  }
+  .routine-index {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    background: var(--ink);
+    padding: 4px 10px;
+    border-radius: 2px;
+    letter-spacing: 0.1em;
+  }
+  .routine-header h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--ink);
+    margin: 0;
+  }
+  .routine-freq {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .routine-body {
+    padding: 24px;
+  }
+  .routine-body p {
+    font-size: 14px;
+    color: #3a3630;
+    margin-bottom: 16px;
+    line-height: 1.65;
+  }
+  .routine-body p:last-of-type { margin-bottom: 0; }
+  .trigger-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 12px 0 18px;
+  }
+  .trigger-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    padding: 4px 10px;
+    border-radius: 2px;
+    border: 1px solid var(--rule);
+    color: var(--slate);
+    background: var(--paper);
+  }
+
+  /* ─── ARTIFACT CARDS ─── */
+  .artifact-card {
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    margin: 36px 0;
+    overflow: hidden;
+  }
+  .artifact-header {
+    background: var(--ink);
+    padding: 22px 28px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .artifact-type-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    border: 1px solid rgba(200,168,75,0.45);
+    color: var(--gold);
+    padding: 4px 10px;
+    border-radius: 2px;
+    white-space: nowrap;
+    margin-top: 3px;
+  }
+  .artifact-header-text h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--paper);
+    margin: 0 0 6px;
+  }
+  .artifact-header-text p {
+    font-size: 13px;
+    color: rgba(245,242,236,0.55);
+    margin: 0;
+    line-height: 1.5;
+  }
+  .artifact-body {
+    padding: 24px 28px;
+  }
+  .artifact-body p {
+    font-size: 14px;
+    color: #3a3630;
+    margin-bottom: 16px;
+    line-height: 1.65;
+  }
+  .artifact-body p:last-of-type { margin-bottom: 0; }
+  .data-sources-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 12px 0 18px;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 640px) {
+    .masthead, .body-wrap, .footer, .appendix-body, .appendix-divider { padding-left: 24px; padding-right: 24px; }
+    .toc-bar { padding: 0 24px; }
+    .stack-grid { grid-template-columns: 1fr; }
+    .routine-header { grid-template-columns: auto 1fr; }
+    .routine-freq { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-eyebrow">Practitioner's Guide · May 2026</div>
+  <h1>Claude Cowork for<br><em>Finance Prospecting</em></h1>
+  <p class="masthead-sub">A zero-to-functional field guide for the Corporate Cash Investment SVP. No code. No technical background required.</p>
+  <div class="masthead-meta">
+    <span class="meta-pill">Claude Cowork GA</span>
+    <span class="meta-pill">Feb 2026 Plugin Expansion</span>
+    <span class="meta-pill">May 2026 Finance Agents</span>
+  </div>
+</header>
+
+<!-- STICKY NAV -->
+<nav class="toc-bar">
+  <a href="#overview">Overview</a>
+  <a href="#setup">Setup</a>
+  <a href="#workflow-1">Contact Lists</a>
+  <a href="#workflow-2">Pre-Call Brief</a>
+  <a href="#workflow-3">Outreach</a>
+  <a href="#workflow-4">Daily Digest</a>
+  <a href="#scheduled">Scheduled Tasks</a>
+  <a href="#caveats">Boundaries</a>
+  <a href="#stack">Stack</a>
+  <a href="#first-task">First Task</a>
+  <a href="#appendix-skills">A · Skills</a>
+  <a href="#appendix-routines">B · Routines</a>
+  <a href="#appendix-artifacts">C · Artifacts</a>
+</nav>
+
+<!-- BODY -->
+<div class="body-wrap">
+
+  <!-- WHAT THIS IS -->
+  <section id="overview">
+    <div class="part-header">
+      <span class="part-label">Part One</span>
+      <h2>The Lay of the Land</h2>
+    </div>
+
+    <p>This guide assumes you know your job. You run a corporate cash portfolio; you speak to money market desks, bank relationship managers, fund company representatives, and counterparty treasury teams daily. What it does not assume is that you have ever opened Claude Desktop's Cowork tab.</p>
+
+    <p>The goal is a working prospecting workflow: one that researches institutions, surfaces contacts, drafts outreach, and maintains a running contact log without you coordinating every step. No code is written, no technical configuration is required, and no platform terms are violated. Every tool referenced here is either a native Anthropic product or a verified connector from the February or May 2026 launches.</p>
+
+    <h3>The Five Layers</h3>
+    <p>Claude Cowork is not a conversational interface. It is an autonomous agent that operates inside the Claude Desktop app, capable of multi-step action on your behalf: reading files, navigating your browser, writing documents, querying connected data services. The distinction from standard chat is structural. In chat, you issue prompts and receive responses in sequence; in Cowork, you describe an outcome and Claude plans and executes the steps required to reach it, surfacing its reasoning as it goes and asking for course corrections only when they are genuinely needed.</p>
+
+    <div class="stack-grid">
+      <div class="stack-card">
+        <div class="stack-card-icon">🖥</div>
+        <div class="stack-card-label">Container</div>
+        <div class="stack-card-title">Claude Desktop</div>
+        <p>Everything runs here. Chat, Cowork, and Code live in one app. Cowork is the tab you'll use.</p>
+      </div>
+      <div class="stack-card">
+        <div class="stack-card-icon">🔌</div>
+        <div class="stack-card-label">Pre-Packaged Skill Sets</div>
+        <div class="stack-card-title">Plugins</div>
+        <p>Finance Analysis, Investment Banking, Equity Research, Market Researcher, Sales — each bundles skills, connectors, and slash commands for a specific domain.</p>
+      </div>
+      <div class="stack-card">
+        <div class="stack-card-icon">⚡</div>
+        <div class="stack-card-label">Live Data Pipes</div>
+        <div class="stack-card-title">Connectors</div>
+        <p>FactSet, MSCI, S&P Global, LSEG, Morningstar, PitchBook, Moody's, Apollo, Clay, Google Workspace. Claude queries these mid-task, no tab switching.</p>
+      </div>
+      <div class="stack-card">
+        <div class="stack-card-icon">🌐</div>
+        <div class="stack-card-label">Browser Control</div>
+        <div class="stack-card-title">Claude in Chrome</div>
+        <p>When no connector exists, Claude navigates your browser directly. IR pages, filings, conference speaker directories, regulatory sites.</p>
+      </div>
+      <div class="stack-card">
+        <div class="stack-card-icon">🧠</div>
+        <div class="stack-card-label">Domain Knowledge</div>
+        <div class="stack-card-title">Skills</div>
+        <p>Expertise baked into plugins. Fire automatically when relevant, or invoke manually with slash commands like <code>/market-researcher</code> or <code>/comps</code>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SETUP -->
+  <section id="setup">
+    <div class="part-header">
+      <span class="part-label">Part Two</span>
+      <h2>Setup</h2>
+    </div>
+
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-body">
+          <strong>Get the Right Plan and Download the App</strong>
+          <p>Cowork requires a paid plan. <strong>Pro ($20/month)</strong> works but reaches usage limits faster on complex research tasks. <strong>Max ($100/month)</strong> is the practical choice for regular sessions. Enterprise covers team-wide shared plugins and admin controls.</p>
+          <p>Download Claude Desktop from <code>claude.com/download</code>. Available for macOS and Windows. Sign in with your Anthropic account and confirm you see three tabs: Chat, Cowork, Code.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-body">
+          <strong>Install the Financial Services Plugins</strong>
+          <p>Go to <strong>Settings → Customize → Plugins</strong>. Install two plugins to start:</p>
+          <p><strong>Financial Analysis</strong> — the core plugin. Sets up connector slots for FactSet, Morningstar, S&P Global, Moody's, LSEG, PitchBook, and others. Your starting point for all research tasks.</p>
+          <p><strong>Sales</strong> — handles contact research and CRM integration. Includes a <code>/call-prep</code> skill and integrations with Apollo, Clay, HubSpot, and Salesforce.</p>
+          <p>Claude walks you through setup via questions about your role. Answer accurately — your responses tune the skills to your context.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-body">
+          <strong>Connect Your Data Sources</strong>
+          <p>Go to <strong>Settings → Customize → Connectors</strong>. Authorize the sources relevant to your workflow:</p>
+          <div class="connector-row">
+            <span class="connector-tag tag-data">FactSet</span>
+            <span class="connector-tag tag-data">S&P Capital IQ</span>
+            <span class="connector-tag tag-data">LSEG</span>
+            <span class="connector-tag tag-data">Morningstar</span>
+            <span class="connector-tag tag-data">PitchBook</span>
+            <span class="connector-tag tag-data">Moody's MCP</span>
+            <span class="connector-tag tag-crm">Apollo</span>
+            <span class="connector-tag tag-enrich">Clay</span>
+            <span class="connector-tag tag-comms">Gmail</span>
+            <span class="connector-tag tag-comms">Google Calendar</span>
+            <span class="connector-tag tag-comms">Google Drive</span>
+          </div>
+          <p><strong>Apollo</strong> is now a native Claude connector. Search, enrich, create contacts, and queue outreach sequences directly from Claude without switching applications.</p>
+          <p><strong>FactSet / SPGI</strong> give Claude real-time access to AUM data, fund flows, institutional ownership, and executive contact data. Authorization requires an API key from your data provider's account administrator.</p>
+          <p><strong>Clay</strong> is optional and suited to high-volume prospecting. It runs a data waterfall across dozens of sources to find verified emails and phone numbers ($149+/month).</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-body">
+          <strong>Enable Claude in Chrome</strong>
+          <p>In Connectors, find <strong>Claude in Chrome</strong> and toggle it on. Included at no extra cost. Claude prioritizes connectors first, falls back to the browser when needed, and always asks permission before accessing a new application.</p>
+          <p>This is how it reaches company IR pages, regulatory filings sites, event attendee lists, and conference speaker directories that aren't integrated via API.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-body">
+          <strong>Create a Cowork Project</strong>
+          <p>In the Cowork tab, create a <strong>New Project</strong>. Name it "Finance Prospecting — Cash Investments." Projects are persistent, self-contained workspaces with their own memory, files, and instructions. Everything accumulates over time.</p>
+          <p>Add this instruction set in the project context field — paste it in and adjust the specifics to match your actual mandate:</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-label">→ Project Context Instructions</div>
+      <p>I am a Senior Vice President and Portfolio Manager in corporate cash investment management. When researching contacts, I am looking for: Treasurer and Assistant Treasurer roles at corporations with $500M+ cash balances, relationship managers at primary dealer banks (fixed income / cash management desks), fund company representatives covering institutional money market and ultra-short bond products, and custodian bank contacts (securities lending, collateral management). Prioritize contacts at firms where we have existing or potential business relationships. Output contact lists in tabular format with name, title, firm, LinkedIn URL, email (if available), and a one-line note on why this contact is relevant.</p>
+    </div>
+
+    <div class="callout callout-tip">
+      <div class="callout-title">💡 Why This Matters</div>
+      <p>This instruction set fires on every task inside this project, eliminating the need to re-establish role context at the start of each session. Cowork's project memory accumulates over time, recognizing patterns in your coverage universe and applying your preferred output formats without prompting.</p>
+    </div>
+  </section>
+
+  <!-- WORKFLOWS -->
+  <section id="workflows">
+    <div class="part-header">
+      <span class="part-label">Part Three</span>
+      <h2>Prospecting Workflows</h2>
+    </div>
+    <p>Four tasks you can assign to Cowork as completed deliverables. Describe the outcome, submit the task, and return to finished work.</p>
+
+    <!-- WF1 -->
+    <div id="workflow-1">
+      <div class="workflow-header">
+        <span class="workflow-num">WF — 01</span>
+        <h3>Build a Targeted Contact List from Scratch</h3>
+      </div>
+      <div class="workflow-body">
+        <div class="replaces-badge">Manually cross-referencing Bloomberg, FactSet, and LinkedIn before a coverage expansion or product launch</div>
+        <p>In the Cowork tab inside your project, type or paste a task like this:</p>
+        <div class="prompt-block">
+          <div class="prompt-label">→ Sample Task Prompt</div>
+          <p>Build me a contact list of corporate treasury decision-makers at investment-grade US companies with publicly reported cash balances above $1 billion. Focus on Treasurer, VP Finance, and Director of Treasury roles. For each contact, I want: full name, title, company, estimated cash balance (from public filings), LinkedIn profile URL, and whether they appear in any recent conference speaker lists for AFP, TMA, or EuroFinance. Export the result to a spreadsheet in my Google Drive Prospecting folder.</p>
+        </div>
+        <p>Claude queries your connected financial data sources for companies meeting the cash balance threshold, uses Apollo to find confirmed contacts by title keyword, uses Claude in Chrome to cross-reference conference speaker directories, and compiles the results into a formatted Google Drive spreadsheet.</p>
+        <p>The task runs 10 to 30 minutes depending on list size and can proceed without your attention.</p>
+        <div class="callout callout-info">
+          <div class="callout-title">📊 Realistic Output</div>
+          <p>50–200 verified contacts per run, with quality varying based on your data connector subscriptions. Apollo-sourced contacts typically run 80–90% email verification rates. FactSet / SPGI cash balance data is institutional grade.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- WF2 -->
+    <div id="workflow-2">
+      <div class="workflow-header">
+        <span class="workflow-num">WF — 02</span>
+        <h3>Research a Prospect Before Outreach</h3>
+      </div>
+      <div class="workflow-body">
+        <div class="replaces-badge">20 minutes of tab-switching before a call — Bloomberg for firm profile, Google for the person, LinkedIn, then mentally assembling the brief</div>
+        <div class="prompt-block">
+          <div class="prompt-label">→ Sample Task Prompt</div>
+          <p>Prepare a pre-call brief for [Name], [Title] at [Company]. Include: their professional background and tenure, their firm's cash management profile (size, known banking relationships, any public commentary on investment policy), recent relevant news (M&A, credit rating changes, earnings notes on cash), any conference panels or published content they've been part of, and three tailored talking points given my focus on [your product or service area].</p>
+        </div>
+        <p>Claude pulls from connected data sources and browser navigation, returning a one-page brief ready two minutes before the call. Save these briefs to your Prospecting project folder in Drive. Cowork's project memory accumulates context on your coverage universe over time.</p>
+      </div>
+    </div>
+
+    <!-- WF3 -->
+    <div id="workflow-3">
+      <div class="workflow-header">
+        <span class="workflow-num">WF — 03</span>
+        <h3>Draft and Queue Personalized Outreach</h3>
+      </div>
+      <div class="workflow-body">
+        <div class="replaces-badge">Manually writing individual emails for a coverage campaign, or using generic templates with low reply rates</div>
+        <p>Once you have a contact list from Workflow 1 or an existing CRM export:</p>
+        <div class="prompt-block">
+          <div class="prompt-label">→ Sample Task Prompt</div>
+          <p>I'm attaching a prospect list [paste or upload CSV]. For each contact, draft a personalized first-touch email from my perspective as an SVP in corporate cash investment management. Each email should: reference something specific about their firm or role (use connected data to find a relevant hook), lead with value rather than an ask, run 4–5 sentences, and end with a soft call to action for a 20-minute intro call. Save drafts in a Google Sheet with columns for contact name, firm, email address, and draft message body. Flag any contacts where you couldn't find a relevant hook — I'll handle those manually.</p>
+        </div>
+        <p>If the Outreach connector is enabled, Claude can add these contacts directly to an Outreach sequence, removing the export and re-import step entirely.</p>
+        <div class="callout callout-tip">
+          <div class="callout-title">On Tone Calibration</div>
+          <p>Review 10 drafts before approving the full batch on first use. If the register is off, add a correction to your project instructions: "Draft outreach in a formal but direct tone. Avoid 'I hope this finds you well.' Do not mention AI assistance." Cowork's project memory applies this to all subsequent sessions.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- WF4 -->
+    <div id="workflow-4">
+      <div class="workflow-header">
+        <span class="workflow-num">WF — 04</span>
+        <h3>Morning Market Intelligence Digest (Recurring)</h3>
+      </div>
+      <div class="workflow-body">
+        <div class="replaces-badge">Manually curating a briefing from Bloomberg alerts, news services, and industry newsletters</div>
+        <p>Cowork supports scheduled recurring tasks. Configure this one to run on weekdays at 6:45 AM:</p>
+        <div class="prompt-block">
+          <div class="prompt-label">→ Recurring Task Prompt</div>
+          <p>Every weekday morning, compile a 1-page market intelligence digest for a corporate cash portfolio manager. Include: overnight Fed funds activity and money market rate moves, any notable CP/CD issuance or spread changes, earnings releases or credit events at names in my coverage universe [attach watchlist], any new regulatory guidance relevant to corporate cash investment, and one or two items from financial conference news or industry publications about corporate treasury trends. Format as a 5-minute read. Save to Google Drive and send a summary to my Gmail.</p>
+        </div>
+        <p>The digest runs while you sleep and is available on arrival at your desk.</p>
+        <div class="callout callout-info">
+          <div class="callout-title">May 2026 Addition</div>
+          <p>The May 2026 financial services agent launch includes a dedicated <strong>Market Researcher</strong> plugin that tracks sector and issuer developments, synthesizes news and filings, and flags items for credit and risk review. Install it from the financial services marketplace by searching <code>market-researcher@claude-for-financial-services</code> in the Cowork plugin directory to augment this workflow with purpose-built domain skills.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCHEDULED TASKS -->
+  <section id="scheduled">
+    <div class="part-header">
+      <span class="part-label">Part Four</span>
+      <h2>Scheduled Tasks</h2>
+    </div>
+
+    <p>Scheduled tasks are one of the more operationally significant features in Cowork for a cash portfolio role. Rather than initiating each task manually, you configure it once with a recurrence pattern and a time, and Cowork executes it on schedule while the desktop app is running. The output is delivered to a location you specify: a Google Drive folder, a Gmail summary, a Sheet that updates in place.</p>
+
+    <p>The setup is in the Cowork tab under <strong>Tasks → Schedule</strong>. You write the task description exactly as you would for a one-time task, then set frequency (daily, weekly, on specific weekdays) and execution time. Cowork surfaces a confirmation before the first run and logs each subsequent execution in your task history.</p>
+
+    <p>For a cash investment SVP, three scheduling patterns are worth establishing at the outset. The first is the daily morning digest described in Workflow 4: overnight rate moves, CP/CD spread changes, and credit events in your watchlist, delivered before the open. The second is a weekly coverage refresh, run Friday afternoons, that re-queries Apollo and your connected financial data sources against your existing contact list to surface title changes, firm moves, and new names that meet your criteria. The third is a monthly counterparty intelligence pass: a deeper research task that scans public filings, ratings actions, and news for your active counterparties and writes a structured summary to Drive.</p>
+
+    <div class="callout callout-info">
+      <div class="callout-title">On Scheduling Logistics</div>
+      <p>Claude Desktop must be open and your computer awake for scheduled tasks to execute. If you close the app or your machine sleeps through the scheduled time, the task will not run for that cycle. For tasks where consistent execution matters (the morning digest, for example), a dedicated machine left running overnight or a wake schedule configured in your OS settings resolves this. Cowork does not currently support cloud-side scheduling for Cowork tasks; that execution model is available via Claude Managed Agents on the Claude Platform for teams that need guaranteed delivery.</p>
+    </div>
+
+    <h3>Example Scheduled Task Library</h3>
+    <p>The table below covers a practical set of recurring tasks for a cash investment function. Each can be configured as a standalone scheduled task inside your Finance Prospecting project.</p>
+
+    <table class="pricing-table">
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Frequency</th>
+          <th>Output</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Market intelligence digest</td>
+          <td class="cost">Weekdays, 6:45 AM</td>
+          <td>Gmail summary + Drive doc</td>
+        </tr>
+        <tr>
+          <td>Coverage list refresh (new names, title changes)</td>
+          <td class="cost">Weekly, Friday 4 PM</td>
+          <td>Updated Google Sheet</td>
+        </tr>
+        <tr>
+          <td>Counterparty intelligence pass</td>
+          <td class="cost">Monthly, 1st of month</td>
+          <td>Drive summary doc</td>
+        </tr>
+        <tr>
+          <td>Conference speaker scan (AFP, TMA, EuroFinance)</td>
+          <td class="cost">Monthly</td>
+          <td>Flagged additions to contact sheet</td>
+        </tr>
+        <tr>
+          <td>Outreach follow-up audit (contacts with no reply in 14 days)</td>
+          <td class="cost">Biweekly</td>
+          <td>Follow-up draft queue in Google Sheet</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-tip">
+      <div class="callout-title">On Prompt Precision for Scheduled Tasks</div>
+      <p>Scheduled task prompts should be more explicit than one-time task prompts on three points: the output location (exact Drive folder path or Sheet name), what to do when nothing new is found (write a brief "no material changes" entry rather than skipping the file entirely), and how to handle ambiguous matches (flag them for review rather than resolving them autonomously). A task that runs unattended at 6:45 AM has no opportunity for mid-run clarification, so the more precisely the prompt handles edge cases in advance, the more reliable the output.</p>
+    </div>
+  </section>
+
+  <!-- CAVEATS -->
+  <section id="caveats">
+    <div class="part-header">
+      <span class="part-label">Part Five</span>
+      <h2>Important Boundaries</h2>
+    </div>
+
+    <div class="callout callout-warn">
+      <div class="callout-title">What Claude Will Not Do</div>
+      <p>Cowork blocks investment and trading platforms by default. Claude cannot execute trades, enter orders, or interact with your portfolio management system. These workflows operate at the relationship and intelligence layer only.</p>
+    </div>
+
+    <h3>LinkedIn Automation</h3>
+    <p>Claude in Chrome can navigate LinkedIn and read public profile information. Automating connection requests or messages at scale violates LinkedIn's Terms of Service. The compliant paths are: Apollo (native connector) for contact data discovery and email outreach, since Apollo sources its data through licensed means rather than real-time scraping; LinkupAPI as an MCP connector for programmatic LinkedIn search if your firm's legal team approves it; and Claude in Chrome for research assistance when you are actively reviewing a profile, not for autonomous bulk outreach. LinkedIn Sales Navigator's official partner integrations are the fully compliant path at volume.</p>
+
+    <div class="callout callout-warn">
+      <div class="callout-title">Data Subscriptions Are Required</div>
+      <p>The finance connectors (FactSet, MSCI, S&P, LSEG, PitchBook, Moody's) are data pipes. Claude provides the analysis layer on top, but underlying subscriptions are required for access. Apollo alone is sufficient to run Workflows 1 through 3 at a basic level if institutional data subscriptions are not in place.</p>
+    </div>
+
+    <div class="callout callout-warn">
+      <div class="callout-title">Cowork Is Not a Compliance Tool</div>
+      <p>Outputs Claude produces, including contact lists, pre-call briefs, and outreach drafts, are analyst work product staged for review. Run outreach campaigns through your normal compliance review process.</p>
+    </div>
+
+    <div class="callout callout-info">
+      <div class="callout-title">Sensitive Data Stays Local</div>
+      <p>Cowork runs in an isolated VM on your computer. Documents processed locally do not leave your machine for training. Queries to connected data providers (FactSet, Apollo, etc.) do leave your machine subject to those providers' data terms. Review your firm's data classification policies before connecting any institutional data source.</p>
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section id="stack">
+    <div class="part-header">
+      <span class="part-label">Part Six</span>
+      <h2>Recommended Starting Stack</h2>
+    </div>
+
+    <table class="pricing-table">
+      <thead>
+        <tr>
+          <th>Layer</th>
+          <th>Tool</th>
+          <th>Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Platform</td>
+          <td>Claude Desktop — Max plan</td>
+          <td class="cost">$100 / month</td>
+        </tr>
+        <tr>
+          <td>Core finance plugin</td>
+          <td>Financial Analysis</td>
+          <td class="included">Included</td>
+        </tr>
+        <tr>
+          <td>Outreach plugin</td>
+          <td>Sales plugin</td>
+          <td class="included">Included</td>
+        </tr>
+        <tr>
+          <td>Contact data</td>
+          <td>Apollo (Basic)</td>
+          <td class="cost">$49 / month</td>
+        </tr>
+        <tr>
+          <td>Browser control</td>
+          <td>Claude in Chrome</td>
+          <td class="included">Included</td>
+        </tr>
+        <tr>
+          <td>Data enrichment (optional)</td>
+          <td>Clay</td>
+          <td class="cost">$149 / month</td>
+        </tr>
+        <tr>
+          <td>Market data</td>
+          <td>FactSet (existing subscription)</td>
+          <td class="cost">Existing</td>
+        </tr>
+        <tr>
+          <td>Email / Calendar</td>
+          <td>Google Workspace connector</td>
+          <td class="included">Included</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-info">
+      <div class="callout-title">Total Incremental Cost</div>
+      <p>Assuming an existing FactSet subscription: <strong>$149–$300/month</strong> depending on whether Clay is included. A single prospecting campaign producing 50 qualified contacts and 10 meeting requests typically recovers that cost within the first week of execution.</p>
+    </div>
+  </section>
+
+  <!-- FIRST TASK -->
+  <section id="first-task">
+    <div class="part-header">
+      <span class="part-label">Quick Reference</span>
+      <h2>Your First Task to Run Today</h2>
+    </div>
+
+    <p>With the setup above complete, run this task inside your Finance Prospecting project with the Sales plugin and Apollo connector active:</p>
+
+    <div class="first-task">
+      <div class="ft-label">→ First Task · Paste This Into Cowork</div>
+      <p>Find 20 corporate treasury contacts at US investment-grade companies in the technology or healthcare sector with cash balances above $500M. For each, include name, title, company, estimated cash balance, and whether Apollo has a verified email. Export to a Google Sheet in my Prospecting folder called "May 2026 Initial Coverage List."</p>
+    </div>
+
+    <p>This task demonstrates the full workflow in roughly 15 minutes: Claude querying data sources, surfacing contacts, and writing the spreadsheet to Drive without further input from you. It is a practical baseline for calibrating how the system performs against your actual coverage universe before building out more complex workflows.</p>
+  </section>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     APPENDIX A — AGENT SKILLS
+═══════════════════════════════════════════════════════════════ -->
+
+<div id="appendix-skills" class="appendix-divider">
+  <div class="appendix-divider-eyebrow">Appendix A</div>
+  <h2>Agent <em>Skills</em></h2>
+  <p>Exact creation prompts for the seven skills a cash investment SVP should install in their Finance Prospecting project. Each skill is a persistent instruction set Claude applies automatically whenever the relevant context is detected.</p>
+</div>
+
+<div class="appendix-body">
+
+  <p>Skills in Claude Cowork are reusable instruction packages attached to a project. When you create a skill, you are writing a system-level prompt that Claude loads before executing any task that matches the skill's trigger conditions. The result is consistent behavior without re-prompting: your preferred output format, your analytical framework, your terminology and tone, applied automatically across every session in that project.</p>
+
+  <p>To create a skill, go to the Cowork tab, open your Finance Prospecting project, and select <strong>Project Settings → Skills → Add Skill</strong>. Paste the prompt below into the skill body, give it the name shown, and save. Claude will apply it from the next task onward.</p>
+
+  <!-- SKILL 1 -->
+  <div class="skill-card">
+    <div class="skill-card-header">
+      <span class="skill-badge">Skill 01</span>
+      <h3>Treasury Contact Classifier</h3>
+    </div>
+    <div class="skill-card-body">
+      <div class="skill-meta-row">
+        <div class="skill-meta-item"><strong>Trigger</strong>Contact research, prospect lists, name lookups</div>
+        <div class="skill-meta-item"><strong>Connectors Used</strong>Apollo, FactSet, Claude in Chrome</div>
+        <div class="skill-meta-item"><strong>Output</strong>Structured contact table</div>
+      </div>
+      <p>This skill ensures that every contact Claude surfaces is evaluated against a consistent tiering framework before being added to a prospect list. Without it, Claude will include any contact with a matching title regardless of strategic relevance. With it, Claude applies your coverage logic automatically.</p>
+      <div class="prompt-block">
+        <div class="prompt-label">→ Skill Creation Prompt — Paste into Skill Body</div>
+        <p>When researching, evaluating, or classifying finance contacts, apply the following tiering framework before including any name in an output list.
+
+Tier 1 — Primary targets: Treasurer, Assistant Treasurer, VP Treasury, Director of Treasury, Head of Cash Management, Chief Investment Officer at corporations with cash balances above $500M. These contacts have direct authority over cash investment decisions and counterparty selection.
+
+Tier 2 — Influence contacts: CFO, VP Finance, Director of Finance at corporations with cash balances $200M–$500M; Relationship Managers and Fixed Income Sales at primary dealer banks covering corporate cash; Institutional Sales at money market and ultra-short bond fund companies covering corporate accounts.
+
+Tier 3 — Context contacts: Investor Relations officers, Treasury Analysts, Controllers. Include these only when no Tier 1 or Tier 2 contact is available at a target firm, and flag them clearly as secondary.
+
+For every contact output, include: full name, title, tier classification (1, 2, or 3), firm name, estimated AUM or cash balance where available, verified email (Apollo), LinkedIn URL, and a one-line relevance note. Sort all lists by tier, then alphabetically by firm within each tier. Flag any contact where title or firm data is unconfirmed with [UNVERIFIED] in the relevance note field.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILL 2 -->
+  <div class="skill-card">
+    <div class="skill-card-header">
+      <span class="skill-badge">Skill 02</span>
+      <h3>Pre-Call Research Protocol</h3>
+    </div>
+    <div class="skill-card-body">
+      <div class="skill-meta-row">
+        <div class="skill-meta-item"><strong>Trigger</strong>Pre-call brief, call prep, meeting research</div>
+        <div class="skill-meta-item"><strong>Connectors Used</strong>FactSet, Claude in Chrome, Google Drive</div>
+        <div class="skill-meta-item"><strong>Output</strong>One-page brief, Drive doc</div>
+      </div>
+      <p>This skill standardizes the structure and research depth of every pre-call brief Claude produces. Rather than generating a generic summary, it forces Claude to retrieve specific data points relevant to a cash investment conversation: investment policy indicators, banking relationships, credit profile signals, and prior contact history from your Drive files.</p>
+      <div class="prompt-block">
+        <div class="prompt-label">→ Skill Creation Prompt — Paste into Skill Body</div>
+        <p>When preparing a pre-call brief for any contact, follow this exact structure and research sequence. Do not omit sections; mark any section "Not found" if data is unavailable rather than skipping it.
+
+Section 1 — Contact Profile: Full name, title, firm, tenure in current role (estimate from LinkedIn if not confirmed), prior roles relevant to cash or treasury, any published commentary or conference participation in the last 24 months.
+
+Section 2 — Firm Cash Profile: Reported cash and short-term investments from most recent 10-Q or 10-K (cite the filing date); year-over-year change in cash position; any public commentary on investment policy or liquidity strategy from earnings transcripts or investor day materials.
+
+Section 3 — Credit and Counterparty Signals: Current issuer credit rating from Moody's and S&P if available; any ratings actions or outlook changes in the last 12 months; recent M&A activity or capital structure changes that may affect cash levels.
+
+Section 4 — Banking Relationships: Known primary banking relationships from public filings or press releases; any named custodian, money market fund provider, or sweep account arrangement in public documents.
+
+Section 5 — Relationship History: Search my Google Drive Prospecting folder for any prior notes, briefs, or correspondence referencing this contact or their firm. Summarize what exists and flag the file name.
+
+Section 6 — Talking Points: Three specific, non-generic opening angles for this conversation, each grounded in a data point from sections above. Do not use generic value propositions. Each talking point should reference something specific about their firm's cash profile, credit situation, or recent news.
+
+Format the brief as a single Google Doc saved to my Prospecting/Call Briefs folder, named: [Contact Last Name]_[Firm]_[YYYY-MM-DD].doc</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILL 3 -->
+  <div class="skill-card">
+    <div class="skill-card-header">
+      <span class="skill-badge">Skill 03</span>
+      <h3>Outreach Voice and Compliance Guard</h3>
+    </div>
+    <div class="skill-card-body">
+      <div class="skill-meta-row">
+        <div class="skill-meta-item"><strong>Trigger</strong>Email drafting, outreach, follow-up</div>
+        <div class="skill-meta-item"><strong>Connectors Used</strong>Apollo, Gmail, Google Sheets</div>
+        <div class="skill-meta-item"><strong>Output</strong>Draft email queue, flagged items</div>
+      </div>
+      <p>This skill governs tone, structure, and compliance-relevant constraints for all outreach drafts. It also instructs Claude to flag any draft where the proposed hook could be construed as an investment recommendation, a performance claim, or a statement requiring regulatory review — a meaningful safeguard when outreach references yield data, fund performance, or credit spreads.</p>
+      <div class="prompt-block">
+        <div class="prompt-label">→ Skill Creation Prompt — Paste into Skill Body</div>
+        <p>When drafting any outreach email or follow-up message, apply the following rules without exception.
+
+Tone and register: Formal and direct. Do not use pleasantries such as "I hope this finds you well," "reaching out to connect," or "touch base." Do not use first-person superlatives or performance language. Do not reference AI assistance or automated research.
+
+Structure: Four to five sentences maximum. Sentence 1: a specific, researched observation about the recipient's firm (cash position, recent credit event, filing detail, conference commentary — sourced from data, not generic). Sentence 2–3: a relevant, non-promotional statement about how our cash investment capabilities are relevant to their situation. Sentence 4: a single, low-friction call to action (a 20-minute call, not a meeting or a pitch). No closing sentence beyond the call to action.
+
+Compliance flags — automatically add a [COMPLIANCE REVIEW] tag to any draft that: references a specific yield, rate, or return figure; names a specific fund or product by name; includes a forward-looking statement about market conditions; makes a comparative claim about performance relative to a benchmark or competitor. Do not remove these drafts from the output queue; flag them and continue.
+
+Subject lines: Specific and non-promotional. Reference the firm name or a concrete detail. Do not use questions, exclamation points, or engagement-bait constructions.
+
+Output all drafts to a Google Sheet named "Outreach Queue — [Month] [Year]" in my Prospecting folder, with columns: Contact Name, Firm, Email, Subject Line, Draft Body, Compliance Flag (Y/N), Flag Reason.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILL 4 -->
+  <div class="skill-card">
+    <div class="skill-card-header">
+      <span class="skill-badge">Skill 04</span>
+      <h3>Counterparty Credit Monitor</h3>
+    </div>
+    <div class="skill-card-body">
+      <div class="skill-meta-row">
+        <div class="skill-meta-item"><strong>Trigger</strong>Credit monitoring, counterparty research, watchlist</div>
+        <div class="skill-meta-item"><strong>Connectors Used</strong>Moody's MCP, S&P, FactSet, Claude in Chrome</div>
+        <div class="skill-meta-item"><strong>Output</strong>Drive summary, Gmail alert on material changes</div>
+      </div>
+      <p>This skill instructs Claude to apply a consistent monitoring framework when scanning for credit and counterparty developments. It defines what constitutes a material change requiring immediate notification versus a routine update logged to Drive, preventing alert fatigue while ensuring nothing consequential is missed.</p>
+      <div class="prompt-block">
+        <div class="prompt-label">→ Skill Creation Prompt — Paste into Skill Body</div>
+        <p>When monitoring or researching counterparty credit developments, apply the following materiality framework.
+
+Immediate notification required (send Gmail summary in addition to Drive log): any ratings downgrade or negative watch placement by Moody's or S&P on an active counterparty; any downgrade that crosses an investment-grade threshold (below Baa3/BBB-); any regulatory action, enforcement order, or consent agreement involving a counterparty's banking or broker-dealer entity; any announced merger, acquisition, or change-of-control transaction involving a counterparty; any earnings release disclosing a material liquidity shortfall, covenant breach, or going-concern qualification.
+
+Routine log only (Drive doc update, no email): affirmation of existing ratings with stable outlook; earnings releases with no material credit indicators; personnel changes at counterparty firms; general news coverage without credit implications.
+
+For every item logged, record: counterparty name, event type, date, source, materiality classification (immediate/routine), and a two-sentence summary of the credit implication. Save to Google Drive in my Prospecting/Counterparty Monitor folder in a file named "Credit Monitor Log — [YYYY]." Append new entries; do not overwrite.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILL 5 -->
+  <div class="skill-card">
+    <div class="skill-card-header">
+      <span class="skill-badge">Skill 05</span>
+      <h3>Conference Intelligence Extractor</h3>
+    </div>
+    <div class="skill-card-body">
+      <div class="skill-meta-row">
+        <div class="skill-meta-item"><strong>Trigger</strong>Conference research, event speakers, AFP, TMA, EuroFinance</div>
+        <div class="skill-meta-item"><strong>Connectors Used</strong>Claude in Chrome</div>
+        <div class="skill-meta-item"><strong>Output</strong>Annotated contact additions to prospect sheet</div>
+      </div>
+      <p>Industry conferences (AFP National, TMA Annual, EuroFinance, Finadium, Strategic Treasurer Summit) are among the highest-signal sources for identifying active treasury decision-makers. This skill instructs Claude to extract structured contact intelligence from conference programs and speaker directories, cross-reference names against your existing prospect list, and add net-new names with context.</p>
+      <div class="prompt-block">
+        <div class="prompt-label">→ Skill Creation Prompt — Paste into Skill Body</div>
+        <p>When researching a financial industry conference for prospecting intelligence, follow this extraction protocol.
+
+Target conferences: AFP National Conference, TMA Annual Conference, EuroFinance International Cash and Treasury Management, Finadium Investors in Securities Finance, Strategic Treasurer Summit, TEXPO, and any conference whose program includes a Treasury Management, Cash Investment, or Corporate Finance track.
+
+For each speaker or panelist found: extract full name, title, firm, session title, and session topic. Classify each by contact tier using the Treasury Contact Classifier skill (Tier 1, 2, or 3). Then cross-reference against my existing Google Sheet in Prospecting/Coverage Lists — if the name already exists, add the conference appearance to their record in the "Conference Signal" column. If the name is new and qualifies as Tier 1 or Tier 2, add them as a new row with source noted as the conference name and year.
+
+Do not add Tier 3 contacts from conferences unless they are speaking on a cash investment, short-duration, or liquidity management topic, in which case note the session title as the relevance hook.
+
+Flag any speaker at a competitor firm (ask me to confirm the competitor list if not already in project context) so I can review before outreach.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILL 6 -->
+  <div class="skill-card">
+    <div class="skill-card-header">
+      <span class="skill-badge">Skill 06</span>
+      <h3>Market Rate and Instrument Digest</h3>
+    </div>
+    <div class="skill-card-body">
+      <div class="skill-meta-row">
+        <div class="skill-meta-item"><strong>Trigger</strong>Market digest, rate research, money market, CP, CD</div>
+        <div class="skill-meta-item"><strong>Connectors Used</strong>FactSet, LSEG, Claude in Chrome</div>
+        <div class="skill-meta-item"><strong>Output</strong>Structured digest, Drive doc</div>
+      </div>
+      <p>This skill standardizes the format and data sources for any market intelligence output, ensuring that rate and spread figures Claude pulls are cited with source and date, and that the digest structure is consistent enough to be scanned in under five minutes every morning.</p>
+      <div class="prompt-block">
+        <div class="prompt-label">→ Skill Creation Prompt — Paste into Skill Body</div>
+        <p>When compiling any market intelligence digest or rate summary for a corporate cash investment context, apply the following structure and sourcing standards.
+
+Required data points (retrieve from FactSet or LSEG; note source and retrieval date next to each figure):
+— Overnight SOFR and EFFR (Federal Funds Effective Rate), prior day close
+— 1-month, 3-month, and 6-month Treasury bill yields, prior day close
+— 3-month SOFR term rate
+— A1/P1 commercial paper spread to T-bills, 30-day and 90-day tenors
+— Representative CD rates at systemically important banks, 3-month tenor
+— 7-day and 30-day prime money market fund yields (use Crane Data or iMoneyNet if accessible via browser; otherwise note "MMF yield data unavailable — check Crane Data manually")
+
+Format: Present as a structured table with instrument, rate/yield, prior day change (bps), and source. Follow the table with a two-paragraph narrative: the first paragraph states what moved and by how much; the second flags any spread widening, curve inversion, or policy-related development worth noting for a short-duration portfolio. Do not editorialize or forecast. Cite only what the data shows.
+
+Close with a one-paragraph summary of any credit or issuer news relevant to the CP/CD market from overnight wire services.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILL 7 -->
+  <div class="skill-card">
+    <div class="skill-card-header">
+      <span class="skill-badge">Skill 07</span>
+      <h3>Relationship Status Tracker</h3>
+    </div>
+    <div class="skill-card-body">
+      <div class="skill-meta-row">
+        <div class="skill-meta-item"><strong>Trigger</strong>CRM update, relationship log, follow-up, pipeline</div>
+        <div class="skill-meta-item"><strong>Connectors Used</strong>Gmail, Google Drive, Apollo</div>
+        <div class="skill-meta-item"><strong>Output</strong>Updated pipeline sheet, follow-up queue</div>
+      </div>
+      <p>This skill governs how Claude maintains the relationship pipeline log: what counts as a touchpoint, how status fields are updated, and when a contact should be surfaced for follow-up. It replaces the manual CRM update step that most relationship managers skip under time pressure, ensuring the pipeline remains accurate without requiring deliberate maintenance.</p>
+      <div class="prompt-block">
+        <div class="prompt-label">→ Skill Creation Prompt — Paste into Skill Body</div>
+        <p>When updating or auditing the relationship pipeline, apply the following status taxonomy and update rules.
+
+Pipeline status definitions:
+— Identified: contact found, not yet reached
+— Contacted: first outreach sent, no reply
+— Engaged: reply received or meeting confirmed
+— Active: meeting held, follow-up in progress
+— Warm: ongoing dialogue, no immediate action item
+— Dormant: no response after two follow-up attempts; last contact over 90 days ago
+— Closed/Not Pursuing: contact declined engagement or no longer meets criteria
+
+Update rules: When scanning Gmail for sent messages and replies, update status automatically for any contact whose email address appears in my Prospecting coverage sheet. If a reply is received from a contact at Engaged or lower, escalate to Engaged and note the date. If a contact has been in "Contacted" status for more than 14 days with no reply, move to a follow-up queue. If a contact has been Dormant for more than 180 days, flag for manual review rather than removing.
+
+Follow-up queue output: A tab in the Prospecting pipeline sheet named "Follow-Up Required" listing all contacts where a follow-up action is due, sorted by days since last touch (descending). Include: name, firm, tier, current status, last touch date, and a suggested follow-up action (re-engagement email, LinkedIn check, phone).
+
+Run this update automatically whenever I ask for a pipeline review, a follow-up audit, or a coverage status report.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     APPENDIX B — ROUTINES
+═══════════════════════════════════════════════════════════════ -->
+
+<div id="appendix-routines" class="appendix-divider">
+  <div class="appendix-divider-eyebrow">Appendix B</div>
+  <h2>Routines <em>Library</em></h2>
+  <p>Fourteen named routines covering the full operating cycle of a cash investment prospecting practice. Each is designed to run as a Cowork scheduled task or on-demand workflow with a single trigger phrase.</p>
+</div>
+
+<div class="appendix-body">
+
+  <p>Routines are the repeatable workflows that constitute the operating cadence of a prospecting practice: the daily briefings, the weekly pipeline audits, the monthly coverage expansions, the quarterly relationship reviews. Defining them explicitly in Cowork, with named trigger phrases and attached skills, means the overhead of managing this cadence approaches zero. You invoke a routine by name; Claude executes the full sequence.</p>
+
+  <p>Each routine below specifies a name, a recommended frequency, the skills it activates, and the exact prompt to use. For scheduled routines, the prompt goes directly into the Cowork scheduler. For on-demand routines, it can be saved as a project shortcut or simply copied when needed.</p>
+
+  <!-- R01 -->
+  <div class="routine-card">
+    <div class="routine-header">
+      <span class="routine-index">R — 01</span>
+      <h3>Morning Market Open</h3>
+      <span class="routine-freq">Daily · 6:45 AM</span>
+    </div>
+    <div class="routine-body">
+      <div class="trigger-row">
+        <span class="trigger-tag">Market Rate Digest skill</span>
+        <span class="trigger-tag">Gmail</span>
+        <span class="trigger-tag">Google Drive</span>
+      </div>
+      <p>Compiles overnight rate moves, CP/CD spread data, relevant credit events, and regulatory news into a five-minute structured brief, delivered to Gmail and saved to Drive before market open. Described in full in Workflow 4 of the main guide.</p>
+      <div class="prompt-block">
+        <div class="prompt-label">→ Scheduler Prompt</div>
+        <p>Run the Morning Market Open routine. Compile overnight rate and spread data (SOFR, EFFR, T-bill yields, CP/CD spreads, MMF yields) using the Market Rate and Instrument Digest skill. Add a one-paragraph credit and issuer news summary. Check my watchlist in Prospecting/Watchlists/active-counterparties.sheet for any names with overnight news. Format as a five-minute brief, save to Prospecting/Digests/[YYYY-MM-DD]-morning-open.doc, and send a two-paragraph summary to my Gmail.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- R02 -->
+  <div class="routine-card">
+    <div class="routine-header">
+      <span class="routine-index">R — 02</span>
+      <h3>Coverage List Refresh</h3>
+      <span class="routine-freq">Weekly · Friday 4 PM</span>
+    </div>
+    <div class="routine-body">
+      <div class="trigger-row">
+        <span class="trigger-tag">Treasury Contact Classifier skill</span>
+        <span class="trigger-tag">Apollo</span>
+        <span class="trigger-tag">FactSet</span>
+      </div>
+      <p>Re-queries Apollo and connected financial data sources against the current coverage list to identify title changes, firm moves, promotions, and new names that meet Tier 1 or Tier 2 criteria. Appends net-new contacts, flags changed records, and logs a change summary for review Monday morning.</p>
+      <div class="prompt-block">
+        <div class="prompt-label">→ Scheduler Prompt</div>
+        <p>Run the Coverage List Refresh routine. Open my master coverage sheet in Prospecting/Coverage Lists/master-coverage.sheet. For each existing contact, verify current title and firm against Apollo and FactSet; flag any discrepancy in a "Changed" column with the prior and current value. Then run a new search for Tier 1 and Tier 2 contacts added to Apollo in the last 30 days at firms already on my list. Append net-new contacts using the Treasury Contact Classifier skill. Log a summary of changes (N updated records, N new contacts added) in a new row at the top of a "Change Log" tab. Save the updated sheet in place.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- R03 -->
+  <div class="routine-card">
+    <div class="routine-header">
+      <span class="routine-index">R — 03</span>
+      <h3>Pipeline Follow-Up Audit</h3>
+      <span class="routine-freq">Biweekly · Monday 8 AM</span>
+    </div>
+    <div class="routine-body">
+      <div class="trigger-row">
+        <span class="trigger-tag">Relationship Status Tracker skill</span>
+        <span class="trigger-tag">Gmail</span>
+        <span class="trigger-tag">Google Sheets</span>
+      </div>
+      <p>Scans Gmail sent and received mail against the pipeline, updates relationship status fields, surfaces contacts due for follow-up, and generates a prioritized follow-up queue for the week. This routine eliminates the manual CRM review that most practitioners skip.</p>
+      <div class="prompt-block">
+        <div class="prompt-label">→ Scheduler Prompt</div>
+        <p>Run the Pipeline Follow-Up Audit. Using the Relationship Status Tracker skill, scan my Gmail sent folder for the last 14 days and update relationship statuses in Prospecting/Coverage Lists/master-coverage.sheet. Move any contact in "Contacted" status with no reply after 14 days to the Follow-Up Required tab. Check for any contacts in "Engaged" status with no activity in 21 days and flag those as well. Generate a follow-up priority queue sorted by days since last touch. Email me a plain-text summary of: total pipeline by status, contacts requiring follow-up this week (with names and suggested actions), and any contacts that moved to Dormant since the last audit.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- R04 -->
+  <div class="routine-card">
+    <div class="routine-header">
+      <span class="routine-index">R — 04</span>
+      <h3>New Coverage Expansion</h3>
+      <span class="routine-freq">Monthly · 1st of month</span>
+    </div>
+    <div class="routine-body">
+      <div class="trigger-row">
+        <span class="trigger-tag">Treasury Contact Classifier skill</span>
+        <span class="trigger-tag">Apollo</span>
+        <span class="trigger-tag">FactSet</span>
+        <span class="trigger-tag">Claude in Chrome</span>
+      </div>
+      <p>Runs a full prospecting pass to identify net-new firms and contacts not currently on the coverage list. Applies a configurable sector and cash balance filter, classifies all results by tier, deduplicates against existing coverage, and delivers a new-names report for review.</p>
+      <div class="prompt-block">
+        <div class="prompt-label">→ Scheduler Prompt</div>
+        <p>Run the New Coverage Expansion routine. Search Apollo and FactSet for corporate treasury contacts at US investment-grade companies with cash balances above $500M that do not currently appear in my master coverage sheet. Sector focus this month: [insert sector — e.g., Industrials, Consumer Staples]. Apply the Treasury Contact Classifier skill to all results; include only Tier 1 and Tier 2 contacts. Deduplicate against master-coverage.sheet using firm name and email as match keys. Output net-new contacts to a new tab in Prospecting/Coverage Lists/master-coverage.sheet named "New — [Month YYYY]" with all standard fields populated. Summarize: total new contacts found, breakdown by tier and sector, and any firm that appears in FactSet for the first time this month (potential new cash balance entrant).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- R05 -->
+  <div class="routine-card">
+    <div class="routine-header">
+      <span class="routine-index">R — 05</span>
+      <h3>Counterparty Credit Sweep</h3>
+      <span class="routine-freq">Monthly · 1st of month</span>
+    </div>
+    <div class="routine-body">
+      <div class="trigger-row">
+        <span class="trigger-tag">Counterparty Credit Monitor skill</span>
+        <span class="trigger-tag">Moody's MCP</span>
+        <span class="trigger-tag">FactSet</span>
+        <span class="trigger-tag">S&P</span>
+      </div>
+      <p>Runs a full credit sweep across all active counterparties in the watchlist, logs routine updates, and escalates material changes. Designed to run concurrently with the New Coverage Expansion on the first of each month.</p>
+      <div class="prompt-block">
+        <div class="prompt-label">→ Scheduler Prompt</div>
+        <p>Run the Counterparty Credit Sweep. Load my active counterparty watchlist from Prospecting/Watchlists/active-counterparties.sheet. For each counterparty, retrieve the current long-term issuer credit rating from Moody's and S&P, and check for any ratings actions, outlook changes, or watchlist placements in the last 30 days. Apply the Counterparty Credit Monitor skill to classify each finding as immediate notification or routine log. Append all routine findings to Prospecting/Counterparty Monitor/Credit Monitor Log — [YYYY].doc. For any immediate notification items, send me a Gmail alert immediately with the counterparty name, the event, and a two-sentence credit summary. Close with a summary table showing all active counterparties, current ratings, and last-change date.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- R06 -->
+  <div class="routine-card">
+    <div class="routine-header">
+      <span class="routine-index">R — 06</span>
+      <h3>Quarterly Relationship Review</h3>
+      <span class="routine-freq">Quarterly · 1st weekday of quarter</span>
+    </div>
+    <div class="routine-body">
+      <div class="trigger-row">
+        <span class="trigger-tag">Relationship Status Tracker skill</span>
+        <span class="trigger-tag">Pre-Call Research skill</span>
+        <span class="trigger-tag">Gmail · Google Drive</span>
+      </div>
+      <p>Produces a full-coverage relationship health report: pipeline depth by tier, engagement rates, dormant contact analysis, and a prioritized list of re-engagement candidates for the coming quarter. Replaces the manual end-of-quarter coverage review.</p>
+      <div class="prompt-block">
+        <div class="prompt-label">→ Scheduler Prompt</div>
+        <p>Run the Quarterly Relationship Review. Pull the full master coverage sheet and produce a relationship health report for Q[N] [YYYY] covering: total contacts by tier and status; engagement rate (contacts at Engaged or above divided by total Contacted or above); average days from first contact to Engaged for contacts that progressed this quarter; list of contacts that moved to Dormant this quarter with last touch date and suggested re-engagement window; top 10 highest-tier contacts still at Identified status (never contacted) with a note on why outreach may have been deferred. Save the full report to Prospecting/Reviews/Q[N]-[YYYY]-relationship-review.doc and email me a one-page executive summary.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- R07 -->
+  <div class="routine-card">
+    <div class="routine-header">
+      <span class="routine-index">R — 07</span>
+      <h3>Conference Season Scan</h3>
+      <span class="routine-freq">On-demand · Pre-conference (6–8 weeks out)</span>
+    </div>
+    <div class="routine-body">
+      <div class="trigger-row">
+        <span class="trigger-tag">Conference Intelligence Extractor skill</span>
+        <span class="trigger-tag">Claude in Chrome</span>
+        <span class="trigger-tag">Apollo</span>
+      </div>
+      <p>Runs before each major industry conference to extract the speaker list, classify attendees, cross-reference against existing coverage, and generate a pre-conference meeting request queue for Tier 1 and Tier 2 targets attending.</p>
+      <div class="prompt-block">
+        <div class="prompt-label">→ On-Demand Prompt</div>
+        <p>Run the Conference Season Scan for [Conference Name], [Date], [Location]. Navigate to the conference website and extract the full speaker and agenda list. Apply the Conference Intelligence Extractor skill to classify all speakers by tier and cross-reference against my master coverage sheet. For net-new Tier 1 and Tier 2 contacts, add them to my coverage sheet with source noted. For all Tier 1 contacts attending — whether existing coverage or new — generate a draft meeting request email using the Outreach Voice skill. Save the full speaker list with tier classifications to Prospecting/Conferences/[Conference-Name]-[YYYY]-attendees.sheet and the draft meeting requests to my Outreach Queue sheet.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- R08 -->
+  <div class="routine-card">
+    <div class="routine-header">
+      <span class="routine-index">R — 08</span>
+      <h3>Earnings Season Cash Watch</h3>
+      <span class="routine-freq">On-demand · During earnings seasons (Jan, Apr, Jul, Oct)</span>
+    </div>
+    <div class="routine-body">
+      <div class="trigger-row">
+        <span class="trigger-tag">Counterparty Credit Monitor skill</span>
+        <span class="trigger-tag">FactSet</span>
+        <span class="trigger-tag">Claude in Chrome</span>
+      </div>
+      <p>Scans earnings releases and transcripts for coverage universe firms during quarterly earnings windows, extracting cash balance changes, investment policy commentary, and any signals that indicate a near-term change in cash deployment strategy or counterparty selection.</p>
+      <div class="prompt-block">
+        <div class="prompt-label">→ On-Demand Prompt</div>
+        <p>Run the Earnings Season Cash Watch for Q[N] [YYYY] earnings. For each firm in my master coverage sheet that has reported earnings in the last 21 days, retrieve the earnings release and transcript from FactSet or via Claude in Chrome. Extract: reported cash and short-term investments versus prior quarter and prior year; any management commentary on investment policy, liquidity targets, or cash deployment; any mention of banking relationships, money market fund usage, or short-duration fixed income allocation. Flag firms where cash balance changed by more than 20% quarter-over-quarter. Output a structured table to Prospecting/Research/[YYYY-Q[N]]-earnings-cash-watch.sheet with firm, cash balance (current and prior quarter), change percentage, and a verbatim quote of any relevant investment policy commentary (cite page number or timestamp).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- R09 -->
+  <div class="routine-card">
+    <div class="routine-header">
+      <span class="routine-index">R — 09</span>
+      <h3>Fed Decision Briefing</h3>
+      <span class="routine-freq">On-demand · Day of FOMC meeting</span>
+    </div>
+    <div class="routine-body">
+      <div class="trigger-row">
+        <span class="trigger-tag">Market Rate Digest skill</span>
+        <span class="trigger-tag">FactSet</span>
+        <span class="trigger-tag">Claude in Chrome</span>
+      </div>
+      <p>Runs on the day of each FOMC meeting to produce an immediate post-decision analysis calibrated to a short-duration corporate cash portfolio: rate and spread impact, money market fund yield implications, CP/CD market reaction, and suggested talking points for conversations with corporate treasury clients in the following week.</p>
+      <div class="prompt-block">
+        <div class="prompt-label">→ On-Demand Prompt</div>
+        <p>Run the Fed Decision Briefing for today's FOMC meeting. Retrieve the FOMC statement and any updated dot plot or SEP projections from the Fed website. Pull post-announcement rate and spread data using the Market Rate and Instrument Digest skill. Produce a two-page brief covering: the decision and any dissents; immediate market reaction in the instruments most relevant to a short-duration corporate cash portfolio (SOFR, T-bills, CP, government MMF yields); the implied path for overnight rates based on the dot plot; and three specific talking points I can use in client conversations this week connecting the decision to their cash investment policy decisions. Save to Prospecting/Research/[YYYY-MM-DD]-fed-decision.doc and email me the talking points section as a plain-text Gmail.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- R10 -->
+  <div class="routine-card">
+    <div class="routine-header">
+      <span class="routine-index">R — 10</span>
+      <h3>Dormant Re-Engagement Campaign</h3>
+      <span class="routine-freq">On-demand · Quarterly</span>
+    </div>
+    <div class="routine-body">
+      <div class="trigger-row">
+        <span class="trigger-tag">Outreach Voice skill</span>
+        <span class="trigger-tag">Pre-Call Research skill</span>
+        <span class="trigger-tag">Apollo · Gmail</span>
+      </div>
+      <p>Identifies contacts that have gone dormant (no response after two attempts, last contact over 90 days ago), re-researches their current situation for a relevant re-engagement hook, and produces a personalized re-engagement email queue distinct in tone and content from first-touch outreach.</p>
+      <div class="prompt-block">
+        <div class="prompt-label">→ On-Demand Prompt</div>
+        <p>Run the Dormant Re-Engagement Campaign. Pull all contacts currently in Dormant status from my master coverage sheet. For each, run the Pre-Call Research Protocol to identify any material change in their situation since the last contact: firm news, personal role change, earnings event, credit development, or conference appearance. For contacts where a relevant hook is found, draft a re-engagement email using the Outreach Voice skill that explicitly acknowledges the gap in contact ("We last spoke in [month]") and leads with the specific new development as the reason for re-engaging. For contacts where no hook is found, flag them as "No re-engagement trigger — hold" and do not draft an email. Output all drafts to my Outreach Queue sheet tagged "Re-Engagement" and note the hook used for each.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- R11 -->
+  <div class="routine-card">
+    <div class="routine-header">
+      <span class="routine-index">R — 11</span>
+      <h3>New Hire Radar</h3>
+      <span class="routine-freq">Weekly · Wednesday 9 AM</span>
+    </div>
+    <div class="routine-body">
+      <div class="trigger-row">
+        <span class="trigger-tag">Treasury Contact Classifier skill</span>
+        <span class="trigger-tag">Apollo</span>
+        <span class="trigger-tag">Claude in Chrome</span>
+      </div>
+      <p>New Treasurer and VP Treasury hires at target firms represent high-priority prospecting opportunities: incoming executives often conduct a banking and investment manager review in their first 90 days. This routine monitors for new hires at coverage universe firms and flags them for immediate outreach.</p>
+      <div class="prompt-block">
+        <div class="prompt-label">→ Scheduler Prompt</div>
+        <p>Run the New Hire Radar. Search Apollo for contacts at firms in my master coverage sheet who have changed roles in the last 7 days, specifically into Tier 1 titles (Treasurer, Assistant Treasurer, VP Treasury, Director of Treasury, Head of Cash Management). Cross-reference against my existing coverage sheet: if the firm is already covered but the contact is new, flag as "New Hire at Covered Firm" and tag for priority outreach within 30 days. If the firm is not on my coverage list but meets my cash balance criteria (check FactSet), add the firm and contact to my coverage sheet. Output a weekly new hire summary to Prospecting/New-Hires/[YYYY-WW]-new-hire-radar.sheet with: contact name, title, firm, hire date (if available), prior role (if available), coverage status, and recommended outreach timing.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- R12 -->
+  <div class="routine-card">
+    <div class="routine-header">
+      <span class="routine-index">R — 12</span>
+      <h3>Regulatory Watch</h3>
+      <span class="routine-freq">Weekly · Thursday 7 AM</span>
+    </div>
+    <div class="routine-body">
+      <div class="trigger-row">
+        <span class="trigger-tag">Claude in Chrome</span>
+        <span class="trigger-tag">Google Drive</span>
+      </div>
+      <p>Monitors regulatory sources (SEC, OCC, FSOC, Fed, CFTC) for guidance, rulemaking, or enforcement relevant to corporate cash investment, money market funds, or short-duration fixed income. A single material regulatory development can shift an entire counterparty's investment policy; staying ahead of this is a direct prospecting advantage.</p>
+      <div class="prompt-block">
+        <div class="prompt-label">→ Scheduler Prompt</div>
+        <p>Run the Regulatory Watch routine. Check the following sources for publications in the last 7 days relevant to corporate cash investment, money market fund regulation, short-duration fixed income, or banking counterparty requirements: SEC.gov (Money Market Fund Reform, Regulation NMS), OCC.gov (investment securities, banking guidance), FederalReserve.gov (supervision and regulation), FSOC annual report updates, and CFTC margin rule guidance. For each relevant publication found: summarize in two sentences what changed or was proposed, classify impact as High (affects investment policy directly), Medium (affects counterparty selection or fund eligibility), or Low (informational), and note the effective or comment deadline date. Save to Prospecting/Research/Regulatory-Watch-Log.doc (append, do not overwrite) and email me a plain-text summary of any High or Medium impact items.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- R13 -->
+  <div class="routine-card">
+    <div class="routine-header">
+      <span class="routine-index">R — 13</span>
+      <h3>Outreach Performance Review</h3>
+      <span class="routine-freq">Monthly · Last Friday of month</span>
+    </div>
+    <div class="routine-body">
+      <div class="trigger-row">
+        <span class="trigger-tag">Relationship Status Tracker skill</span>
+        <span class="trigger-tag">Gmail</span>
+        <span class="trigger-tag">Google Sheets</span>
+      </div>
+      <p>Measures the effectiveness of the month's outreach activity: sends, replies, conversion rates by tier and sector, and average time to first engagement. Identifies which message types and hooks produced replies and which did not, enabling iterative refinement of the Outreach Voice skill.</p>
+      <div class="prompt-block">
+        <div class="prompt-label">→ Scheduler Prompt</div>
+        <p>Run the Outreach Performance Review for [Month YYYY]. Pull all outreach activity from my Outreach Queue sheet for the month. Cross-reference with Gmail to identify which contacts replied. Calculate: total emails sent; total replies received; reply rate overall and by tier (Tier 1, 2, 3); median days to first reply for contacts that responded; percentage of outreach that included a compliance flag; top 3 most common hooks used in emails that received replies versus top 3 in emails that received no reply. Produce a one-page summary table saved to Prospecting/Reviews/[YYYY-MM]-outreach-performance.doc. Add a plain-text recommendations section: based on the data, suggest one specific change to the Outreach Voice skill prompt that may improve reply rate next month.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- R14 -->
+  <div class="routine-card">
+    <div class="routine-header">
+      <span class="routine-index">R — 14</span>
+      <h3>Annual Coverage Audit</h3>
+      <span class="routine-freq">Annual · First week of January</span>
+    </div>
+    <div class="routine-body">
+      <div class="trigger-row">
+        <span class="trigger-tag">All skills</span>
+        <span class="trigger-tag">Apollo · FactSet · Gmail · Google Drive</span>
+      </div>
+      <p>A full annual reset of the coverage universe: verifies every contact against current Apollo and FactSet data, removes names that no longer meet criteria, upgrades or downgrades tier classifications based on changes in firm cash balances, and produces a clean master coverage sheet for the new year alongside a year-in-review relationship summary.</p>
+      <div class="prompt-block">
+        <div class="prompt-label">→ On-Demand Prompt</div>
+        <p>Run the Annual Coverage Audit for [YYYY]. Load my master coverage sheet. For every contact: verify current title and firm against Apollo (flag any that cannot be verified). Re-run the Treasury Contact Classifier skill on all contacts to confirm tier classification based on current FactSet cash balance data; update tier where the firm's cash balance has moved across a threshold. Remove any contact whose firm has been acquired, gone private, or fallen below $200M cash balance (archive to Prospecting/Archive/[YYYY]-archived-contacts.sheet rather than delete). Flag any contact at Identified status with no outreach attempt in over 12 months for a decision: pursue or archive. Produce a clean master sheet for [YYYY+1] and a year-in-review summary covering: total contacts added, total archived, tier distribution, engagement rate, and three coverage gaps by sector or firm size that represent expansion opportunities for the coming year.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     APPENDIX C — LIVE ARTIFACTS
+═══════════════════════════════════════════════════════════════ -->
+
+<div id="appendix-artifacts" class="appendix-divider">
+  <div class="appendix-divider-eyebrow">Appendix C</div>
+  <h2>Live <em>Artifacts</em></h2>
+  <p>Eight persistent, data-connected artifacts that function as the operational infrastructure of a cash investment prospecting practice. Each artifact is a living document that routines and skills write to continuously, rather than a one-time output.</p>
+</div>
+
+<div class="appendix-body">
+
+  <p>An artifact in this context is a persistent file or dashboard that accumulates structured data over time, updated by scheduled routines and on-demand tasks rather than maintained manually. The artifacts below form an interconnected system: the master coverage sheet feeds the outreach queue; the outreach queue feeds the pipeline; the pipeline feeds the quarterly review; the credit monitor feeds the counterparty watchlist. Setting them up correctly at the outset means every routine from Appendix B writes to the right place automatically.</p>
+
+  <p>Each artifact below includes the creation prompt to run once inside your Finance Prospecting project, which instructs Claude to build the file structure in Google Drive. Run these in order before activating any scheduled routines.</p>
+
+  <!-- ART 1 -->
+  <div class="artifact-card">
+    <div class="artifact-header">
+      <div class="artifact-type-badge">Google Sheets</div>
+      <div class="artifact-header-text">
+        <h3>Master Coverage Sheet</h3>
+        <p>The central contact database. Every other artifact references or writes to this file.</p>
+      </div>
+    </div>
+    <div class="artifact-body">
+      <div class="data-sources-row">
+        <span class="connector-tag tag-crm">Apollo</span>
+        <span class="connector-tag tag-data">FactSet</span>
+        <span class="connector-tag tag-comms">Google Drive</span>
+      </div>
+      <p>Contains the full contact universe across all tiers, with relationship status, outreach history, conference signals, and research links. The Relationship Status Tracker skill writes pipeline updates here automatically. The Coverage List Refresh routine validates and extends it weekly.</p>
+      <div class="prompt-block">
+        <div class="prompt-label">→ Artifact Creation Prompt</div>
+        <p>Create a new Google Sheet in my Prospecting/Coverage Lists folder named "master-coverage." Set up the following tabs and column structures.
+
+Tab 1 — Contacts: Contact ID (auto-increment), First Name, Last Name, Full Name, Title, Tier (1/2/3), Firm, Firm Type (Corp/Bank/Fund/Custodian), Cash Balance (USD, from FactSet), Cash Balance Date, LinkedIn URL, Email (Apollo-verified Y/N), Phone, Email Address, City, State, Relationship Status (Identified/Contacted/Engaged/Active/Warm/Dormant/Closed), Last Touch Date, Last Touch Type (Email/Call/Meeting/Conference), Days Since Last Touch (formula), Next Action, Next Action Due Date, Conference Signal, Notes, Drive Brief Link, Date Added, Added By.
+
+Tab 2 — Change Log: Date, Contact ID, Field Changed, Prior Value, New Value, Source.
+
+Tab 3 — Follow-Up Required: Auto-populated via formula pulling all contacts where Next Action Due Date is on or before today and Status is not Closed. Columns: Full Name, Firm, Tier, Status, Last Touch Date, Days Since Last Touch, Next Action.
+
+Tab 4 — Archived: Same columns as Tab 1. Contacts moved here are removed from Tab 1 but preserved for reference.
+
+Format the header row with dark background and gold text. Freeze the header row and the Contact ID column. Enable filter views on Tab 1.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ART 2 -->
+  <div class="artifact-card">
+    <div class="artifact-header">
+      <div class="artifact-type-badge">Google Sheets</div>
+      <div class="artifact-header-text">
+        <h3>Outreach Queue</h3>
+        <p>The staging area for all outreach drafts, organized by status and compliance flag.</p>
+      </div>
+    </div>
+    <div class="artifact-body">
+      <div class="data-sources-row">
+        <span class="connector-tag tag-comms">Gmail</span>
+        <span class="connector-tag tag-crm">Apollo</span>
+        <span class="connector-tag tag-comms">Google Drive</span>
+      </div>
+      <p>Receives draft emails from the Outreach Voice skill, compliance flags from the classifier, and send confirmations from Gmail. The Outreach Performance Review routine reads from this file to calculate monthly reply rates and hook effectiveness. Organized by month with a rolling summary tab.</p>
+      <div class="prompt-block">
+        <div class="prompt-label">→ Artifact Creation Prompt</div>
+        <p>Create a new Google Sheet in my Prospecting folder named "Outreach Queue." Set up the following structure.
+
+Tab 1 — Queue (current month): Contact ID, Full Name, Firm, Tier, Email Address, Subject Line, Draft Body, Outreach Type (First Touch/Follow-Up/Re-Engagement/Conference Request), Hook Used (one-line description of the personalization hook), Compliance Flag (Y/N), Flag Reason, Date Drafted, Status (Draft/Approved/Sent/Replied/No Reply), Date Sent, Date of Reply, Reply Content Summary, Follow-Up Required (Y/N).
+
+Tab 2 — Monthly Archive: Same structure. At the end of each month, the Outreach Performance Review routine moves all sent rows here and creates a new empty Tab 1 for the new month. Archived tabs are named by month: "Archive — Jan 2026," "Archive — Feb 2026," etc.
+
+Tab 3 — Performance Summary: Auto-calculated from all archive tabs. Columns: Month, Emails Sent, Replies Received, Reply Rate, Tier 1 Reply Rate, Tier 2 Reply Rate, Compliance Flags Raised, Top Hook Type by Reply Rate.
+
+Format consistently with master-coverage.sheet. Freeze header rows on all tabs.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ART 3 -->
+  <div class="artifact-card">
+    <div class="artifact-header">
+      <div class="artifact-type-badge">Google Drive · Folder Structure</div>
+      <div class="artifact-header-text">
+        <h3>Call Brief Library</h3>
+        <p>A structured Drive folder that accumulates pre-call research briefs, indexed by contact and date.</p>
+      </div>
+    </div>
+    <div class="artifact-body">
+      <div class="data-sources-row">
+        <span class="connector-tag tag-data">FactSet</span>
+        <span class="connector-tag tag-comms">Google Drive</span>
+        <span class="connector-tag tag-crm">Apollo</span>
+      </div>
+      <p>Every brief generated by the Pre-Call Research Protocol skill is saved here automatically with a consistent naming convention. The Master Coverage Sheet links to each brief in the Drive Brief Link column, making the full research history for any contact accessible from the pipeline view.</p>
+      <div class="prompt-block">
+        <div class="prompt-label">→ Artifact Creation Prompt</div>
+        <p>Create the following folder structure in my Google Drive under a top-level folder named "Prospecting":
+
+Prospecting/
+  Call Briefs/
+    [Briefs will be saved here as: LastName_Firm_YYYY-MM-DD.doc]
+  Coverage Lists/
+    [master-coverage.sheet lives here]
+  Outreach Queue/
+    [Outreach Queue.sheet lives here]
+  Counterparty Monitor/
+    [Credit Monitor Log — YYYY.doc files live here]
+  Digests/
+    [Daily morning briefs: YYYY-MM-DD-morning-open.doc]
+  Conferences/
+    [Conference attendee sheets and speaker lists]
+  Research/
+    [Earnings cash watch, Fed decision briefs, regulatory watch log]
+  Watchlists/
+    [active-counterparties.sheet — to be populated manually with active counterparty names and tickers]
+  New-Hires/
+    [Weekly new hire radar sheets]
+  Reviews/
+    [Quarterly relationship reviews, monthly outreach performance, annual audit]
+  Archive/
+    [Archived contacts and historical files]
+
+After creating the folder structure, confirm the path of each folder and create a plain-text index file at Prospecting/folder-index.txt listing each folder and its intended contents. This index file will be referenced by all routines to confirm correct save paths.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ART 4 -->
+  <div class="artifact-card">
+    <div class="artifact-header">
+      <div class="artifact-type-badge">Google Sheets</div>
+      <div class="artifact-header-text">
+        <h3>Active Counterparty Watchlist</h3>
+        <p>The source-of-truth list of counterparties the credit monitor routines scan against.</p>
+      </div>
+    </div>
+    <div class="artifact-body">
+      <div class="data-sources-row">
+        <span class="connector-tag tag-data">Moody's MCP</span>
+        <span class="connector-tag tag-data">S&P</span>
+        <span class="connector-tag tag-data">FactSet</span>
+      </div>
+      <p>Manually seeded with your active counterparties at setup, then maintained by the Counterparty Credit Sweep routine. The credit monitor skill reads from this file to scope its sweep, and writes rating changes and events back to it. Serves as both the monitoring scope definition and the audit trail.</p>
+      <div class="prompt-block">
+        <div class="prompt-label">→ Artifact Creation Prompt</div>
+        <p>Create a Google Sheet in Prospecting/Watchlists named "active-counterparties." Set up the following columns: Counterparty Name, Ticker/CUSIP, Entity Type (Bank/Broker-Dealer/Fund Company/Custodian/CP Issuer/CD Issuer), Moody's Long-Term Rating, Moody's Outlook, S&P Long-Term Rating, S&P Outlook, Last Rating Action Date, Last Rating Action Type, Investment-Grade Threshold Met (formula: Y if both ratings are Baa3/BBB- or higher), Date Added to Watchlist, Date Last Reviewed, Active Status (Active/Watch/Removed), Notes.
+
+Add a second tab named "Rating History" with columns: Counterparty Name, Date, Rating Agency, Prior Rating, New Rating, Action Type (Upgrade/Downgrade/Affirm/Watch Positive/Watch Negative/Outlook Change), Source.
+
+The Counterparty Credit Sweep routine will append new rows to the Rating History tab and update the main tab's rating fields when changes are found. Leave the first tab empty for me to populate with my active counterparty list before activating the sweep routine.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ART 5 -->
+  <div class="artifact-card">
+    <div class="artifact-header">
+      <div class="artifact-type-badge">Google Doc · Living Document</div>
+      <div class="artifact-header-text">
+        <h3>Credit Monitor Log</h3>
+        <p>A continuously appended log of all counterparty credit events, organized chronologically.</p>
+      </div>
+    </div>
+    <div class="artifact-body">
+      <div class="data-sources-row">
+        <span class="connector-tag tag-data">Moody's MCP</span>
+        <span class="connector-tag tag-data">FactSet</span>
+        <span class="connector-tag tag-data">S&P</span>
+      </div>
+      <p>Every credit event classified as routine by the Counterparty Credit Monitor skill is appended here. The document is structured as a running log with a consistent entry format, making it auditable and searchable. A new file is created each calendar year; prior years are archived in Prospecting/Archive.</p>
+      <div class="prompt-block">
+        <div class="prompt-label">→ Artifact Creation Prompt</div>
+        <p>Create a Google Doc in Prospecting/Counterparty Monitor named "Credit Monitor Log — [current year]." Format it as follows.
+
+Header: "Counterparty Credit Monitor Log — [YYYY]" in the document title style. Below the title, add a one-line note: "This document is maintained automatically by the Counterparty Credit Sweep routine. Do not edit entries; append corrections as new entries with a note referencing the original."
+
+Entry format (to be appended by each sweep): a horizontal rule, then the following fields in a consistent structure:
+Date: [YYYY-MM-DD]
+Counterparty: [Name]
+Event Type: [Ratings Action / Outlook Change / Affirm / Other]
+Details: [Two-sentence summary]
+Source: [Moody's / S&P / FactSet / News wire]
+Materiality: [Routine / Immediate Notification]
+Action Taken: [Logged only / Gmail alert sent]
+
+Create the document with a single placeholder entry dated today marked as "Log initialized — no events recorded" to confirm the file path is correct before the first sweep runs.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ART 6 -->
+  <div class="artifact-card">
+    <div class="artifact-header">
+      <div class="artifact-type-badge">Google Sheets · Live Dashboard</div>
+      <div class="artifact-header-text">
+        <h3>Market Rate Tracker</h3>
+        <p>A rolling rate and spread log that captures each morning digest's data points in structured form.</p>
+      </div>
+    </div>
+    <div class="artifact-body">
+      <div class="data-sources-row">
+        <span class="connector-tag tag-data">FactSet</span>
+        <span class="connector-tag tag-data">LSEG</span>
+        <span class="connector-tag tag-comms">Google Drive</span>
+      </div>
+      <p>Where the morning digest produces a narrative brief for reading, this artifact captures the underlying data in tabular form for historical tracking. After enough data accumulates, it enables trend analysis across SOFR, T-bill yields, and CP/CD spreads over time, visible without opening individual digest documents.</p>
+      <div class="prompt-block">
+        <div class="prompt-label">→ Artifact Creation Prompt</div>
+        <p>Create a Google Sheet in Prospecting/Research named "Market Rate Tracker." Set up a single tab with the following columns, each representing one daily data snapshot: Date, SOFR Overnight, EFFR, T-Bill 1M Yield, T-Bill 3M Yield, T-Bill 6M Yield, SOFR Term 3M, CP Spread to T-Bill 30D (bps), CP Spread to T-Bill 90D (bps), CD Rate 3M (SIFMA), MMF 7-Day Yield (government), MMF 30-Day Yield (government), Source Notes, Digest Doc Link.
+
+Add a second tab named "Trend Charts" with four pre-built Google Sheets charts: (1) SOFR overnight vs EFFR over time; (2) T-bill yields 1M, 3M, 6M over time; (3) CP spread to T-bills 30D and 90D over time; (4) MMF 7-day yield over time. Charts should auto-update as new rows are appended to the data tab.
+
+The Morning Market Open routine will append one new row to the data tab each weekday and save the link to the corresponding digest document in the Digest Doc Link column.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ART 7 -->
+  <div class="artifact-card">
+    <div class="artifact-header">
+      <div class="artifact-type-badge">Google Sheets</div>
+      <div class="artifact-header-text">
+        <h3>New Hire Radar Log</h3>
+        <p>A rolling log of treasury hire events at coverage universe firms, with outreach timing flags.</p>
+      </div>
+    </div>
+    <div class="artifact-body">
+      <div class="data-sources-row">
+        <span class="connector-tag tag-crm">Apollo</span>
+        <span class="connector-tag tag-data">FactSet</span>
+        <span class="connector-tag tag-comms">Google Drive</span>
+      </div>
+      <p>New Treasurer hires at covered firms represent the highest-priority prospecting window in the coverage cycle. This artifact captures every hire detected by the New Hire Radar routine with timing data, enabling disciplined 30/60/90-day outreach sequencing for each new hire.</p>
+      <div class="prompt-block">
+        <div class="prompt-label">→ Artifact Creation Prompt</div>
+        <p>Create a Google Sheet in Prospecting/New-Hires named "New Hire Radar Log." Set up the following columns: Contact ID (link to master-coverage.sheet if already added), Full Name, Title, Firm, Firm Coverage Status (Covered/Not Covered), Hire Detection Date, Estimated Start Date, Prior Role (if available), Tier Classification, 30-Day Outreach Due Date (formula: Hire Detection Date + 30), 60-Day Follow-Up Due Date, Outreach Status (Not Started/Drafted/Sent/Replied), Notes.
+
+Add a second tab named "Outreach Due This Week" that uses a filter formula to pull all rows where 30-Day Outreach Due Date falls within the next 7 days and Outreach Status is Not Started or Drafted. This tab surfaces the time-sensitive outreach items without requiring a manual review of the full log.
+
+The New Hire Radar routine will append new rows weekly. The Outreach Voice skill, when triggered for a new hire, will update the Outreach Status field to "Drafted" and link the draft in the Notes column.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ART 8 -->
+  <div class="artifact-card">
+    <div class="artifact-header">
+      <div class="artifact-type-badge">Google Doc · Quarterly Review</div>
+      <div class="artifact-header-text">
+        <h3>Relationship Review Report</h3>
+        <p>The quarterly and annual relationship health report produced by the review routines.</p>
+      </div>
+    </div>
+    <div class="artifact-body">
+      <div class="data-sources-row">
+        <span class="connector-tag tag-comms">Gmail</span>
+        <span class="connector-tag tag-comms">Google Drive</span>
+        <span class="connector-tag tag-comms">Google Sheets</span>
+      </div>
+      <p>A structured document generated fresh each quarter by the Quarterly Relationship Review routine, saved to a consistent path for accumulation over time. Four quarterly reports and one annual audit report per year, each following the same structure, produce a multi-year coverage practice record that is auditable, presentable to management, and useful for planning coverage strategy.</p>
+      <div class="prompt-block">
+        <div class="prompt-label">→ Artifact Creation Prompt</div>
+        <p>Create a template Google Doc in Prospecting/Reviews named "Relationship Review Template." This template will be copied and populated by the Quarterly Relationship Review and Annual Coverage Audit routines each cycle.
+
+Structure the template with the following sections using Google Docs heading styles:
+
+Title: Corporate Cash Investment — Coverage Relationship Review [Period]
+Prepared by: Claude Cowork · Finance Prospecting Project
+Period: [Quarter/Year or Annual]
+Date Generated: [auto-filled]
+
+Section 1 — Coverage Universe Summary: Total contacts by tier; total firms covered; new contacts added this period; contacts archived this period; net coverage change.
+
+Section 2 — Pipeline Health: Contacts by status (table); engagement rate (Engaged+ divided by Contacted+); median days first contact to Engaged; distribution of last touch dates (histogram description).
+
+Section 3 — Outreach Activity: Emails sent; reply rate; compliance flags raised; top performing hooks (from Outreach Queue performance data).
+
+Section 4 — Notable Developments: New hires at covered firms this period; firms where cash balance crossed a threshold; material credit events in the counterparty watchlist; conference-sourced contacts added.
+
+Section 5 — Coverage Gaps and Recommendations: Sectors or firm sizes underrepresented in current coverage; Tier 1 contacts at Identified status for over 90 days; suggested focus areas for next period.
+
+Save this template to Prospecting/Reviews/relationship-review-template.doc. When the Quarterly Review routine runs, it will create a copy named "Q[N]-[YYYY]-relationship-review.doc" and populate all sections from live data.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<footer class="footer">
+  <div class="footer-left">CLAUDE COWORK — FINANCE PROSPECTING GUIDE · MAY 2026</div>
+  <div class="footer-right">
+    Docs: <a href="https://support.claude.com" target="_blank">support.claude.com</a> &nbsp;·&nbsp;
+    Finance plugins: <a href="https://github.com/anthropics/financial-services" target="_blank">github.com/anthropics/financial-services</a>
+  </div>
+</footer>
+
+<script>
+// Transform all .prompt-block elements into terminal UI
+document.querySelectorAll('.prompt-block').forEach(function(block) {
+  // Get the label text
+  var labelEl = block.querySelector('.prompt-label');
+  var labelText = labelEl ? labelEl.textContent.trim() : 'Prompt';
+
+  // Get the prompt text (from <p> inside)
+  var pEl = block.querySelector('p');
+  var promptText = pEl ? pEl.textContent.trim() : '';
+
+  // Build terminal HTML
+  block.innerHTML =
+    '<div class="prompt-titlebar">' +
+      '<div class="prompt-dots">' +
+        '<span class="dot-red"></span>' +
+        '<span class="dot-yel"></span>' +
+        '<span class="dot-grn"></span>' +
+      '</div>' +
+      '<span class="prompt-tab">' + labelText + '</span>' +
+      '<button class="prompt-copy-btn" data-text="' + promptText.replace(/"/g, '&quot;') + '">Copy</button>' +
+    '</div>' +
+    '<div class="prompt-content"><span class="prompt-text">' + promptText.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</span></div>';
+});
+
+// Copy button handler
+document.addEventListener('click', function(e) {
+  if (!e.target.classList.contains('prompt-copy-btn')) return;
+  var text = e.target.getAttribute('data-text');
+  navigator.clipboard.writeText(text).then(function() {
+    e.target.textContent = 'Copied ✓';
+    e.target.classList.add('copied');
+    setTimeout(function() {
+      e.target.textContent = 'Copy';
+      e.target.classList.remove('copied');
+    }, 2000);
+  }).catch(function() {
+    // Fallback for non-HTTPS
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    e.target.textContent = 'Copied ✓';
+    e.target.classList.add('copied');
+    setTimeout(function() {
+      e.target.textContent = 'Copy';
+      e.target.classList.remove('copied');
+    }, 2000);
+  });
+});
+</script>
+</body>
+</html>
