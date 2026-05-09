@@ -12,11 +12,46 @@ Built on Claude Cowork GA, the February 2026 plugin expansion, and the May 2026 
 
 The guide supports two viewing modes:
 - **Website mode** — full scrollable document with sticky navigation
-- **Slideshow mode** — click the "Slideshow" button in the nav bar to enter a full-screen presentation with keyboard navigation (← → arrow keys, Esc to exit). Every section, workflow, skill card, routine, and artifact becomes its own slide automatically.
+- **Slideshow mode** — click the **Slideshow** button in the nav bar for a full-screen presentation. Arrow keys to navigate, Esc to exit. Every section, skill card, routine, and artifact becomes its own slide automatically — context slide followed by a dark terminal prompt slide.
 
 ---
 
-## What's Inside
+## 🔧 Slideshow Builder Skill
+
+This guide's slideshow mode was built and validated using the **slideshow-builder** Claude skill included in this repository.
+
+**[Download slideshow-builder.skill →](https://github.com/shertokj/corwork_finance_guide/raw/main/skills/slideshow-builder.skill)**
+
+### What it does
+
+The skill enforces a strict decomposition contract: every content type maps to a fixed number of slides with defined content limits. Before any push, it spawns three archetype agents:
+
+| Agent | Checks |
+|---|---|
+| **Skeptic** | Duplicate function definitions, missing edge case guards, document structure integrity |
+| **Writing Style** | Em dashes in prose, emoji in callout titles, hype words, rhetorical questions, bullet lists |
+| **Presenter** | Prompt word counts, rationale paragraph lengths, estimated slide overflow on 1080p |
+
+Zero violations across all agents are required before deployment is permitted.
+
+### Installation
+
+1. Download `slideshow-builder.skill` from the link above or the `skills/` directory
+2. Open Claude Desktop → **Settings → Customize → Skills**
+3. Click **Install from file** and select the `.skill` file
+4. The skill activates automatically on any slideshow-related task
+
+### Repackaging
+
+The full source is in `skills/slideshow-builder/SKILL.md`. To modify and repackage:
+```bash
+cd skills/
+python3 -m scripts.package_skill slideshow-builder
+```
+
+---
+
+## What's Inside the Guide
 
 ### Main Guide
 
@@ -33,11 +68,7 @@ The guide supports two viewing modes:
 | Starting Stack | Recommended tools and cost breakdown |
 | First Task | The exact prompt to run today to prove the concept |
 
----
-
-### Appendix A — Agent Skills
-
-Seven skills with exact creation prompts:
+### Appendix A — Agent Skills (7 skills)
 
 | Skill | Purpose |
 |---|---|
@@ -49,11 +80,7 @@ Seven skills with exact creation prompts:
 | 06 — Market Rate and Instrument Digest | Standardized rate data format with source citation rules |
 | 07 — Relationship Status Tracker | Six-status pipeline taxonomy with Gmail scanning and follow-up logic |
 
----
-
-### Appendix B — Routines Library
-
-Fourteen named routines covering the full operating cycle:
+### Appendix B — Routines Library (14 routines)
 
 | Routine | Frequency |
 |---|---|
@@ -72,52 +99,45 @@ Fourteen named routines covering the full operating cycle:
 | R13 — Outreach Performance Review | Monthly, last Friday |
 | R14 — Annual Coverage Audit | Annual, first week of January |
 
----
-
-### Appendix C — Live Artifacts
-
-Eight persistent, data-connected files forming the operational infrastructure:
+### Appendix C — Live Artifacts (8 artifacts)
 
 | Artifact | Type | Purpose |
 |---|---|---|
-| Master Coverage Sheet | Google Sheets | Central contact database — all routines write here |
-| Outreach Queue | Google Sheets | Draft staging with compliance flags and performance tracking |
-| Call Brief Library | Drive folder | Accumulated pre-call research briefs, indexed by contact |
-| Active Counterparty Watchlist | Google Sheets | Credit monitoring scope and ratings audit trail |
+| Master Coverage Sheet | Google Sheets | Central contact database |
+| Outreach Queue | Google Sheets | Draft staging with compliance flags |
+| Call Brief Library | Drive folder | Pre-call research briefs |
+| Active Counterparty Watchlist | Google Sheets | Credit monitoring scope |
 | Credit Monitor Log | Google Doc | Continuously appended credit event log |
-| Market Rate Tracker | Google Sheets | Rolling rate data with auto-updating charts |
-| New Hire Radar Log | Google Sheets | Hire detection with 30/60/90-day outreach timing |
-| Relationship Review Report | Google Doc template | Quarterly and annual review structure |
-
----
+| Market Rate Tracker | Google Sheets | Rolling rate data with charts |
+| New Hire Radar Log | Google Sheets | Hire detection with outreach timing |
+| Relationship Review Report | Google Doc | Quarterly and annual template |
 
 ### Appendix D — GitHub Integration
 
-How to connect Cowork to GitHub for two distinct purposes:
+Publishing weekly HTML analysis pages as live GitHub Pages sites, and version-controlled backup of prospect data as timestamped CSVs. Includes setup steps, four routines with prompts, Skill 08 — GitHub Integration, and compliance review gates.
 
-**Publishing analysis as live websites.** Every Friday, Claude generates a polished HTML market brief and publishes it to GitHub Pages as a live URL. Prospects receive a link to a professional webpage, not a PDF. A prospect-specific variant generates a page referencing their firm's cash position and a specific market hook, used before high-priority outreach.
+### Appendix E — Slideshow Builder Skill
 
-**Version-controlled prospect data backup.** Each Friday, Claude exports the master coverage sheet, outreach queue, and credit monitor log to a private GitHub repository as timestamped CSVs with pipeline summaries in the commit message. A restore routine retrieves any prior snapshot to a new Drive sheet for comparison.
-
-Includes:
-- Step-by-step setup (GitHub repo, PAT, Cowork project configuration, Pages enablement)
-- Weekly Analysis Page Publish routine (with prompt)
-- Prospect-Specific Analysis Page variant (with prompt)
-- Weekly Data Backup routine (with prompt)
-- Restore from Backup routine (with prompt)
-- Skill 08 — GitHub Integration (with creation prompt)
-- Compliance review gate before any public publish
+Documentation, download link, installation instructions, validation results, and guidance on applying the skill to your own HTML documents.
 
 ---
 
-## Viewing Modes
+## Repository Structure
 
-| Mode | How to Enter | Navigation |
-|---|---|---|
-| Website | Default on load | Scroll, click nav links |
-| Slideshow | Click "Slideshow" button in nav | ← → arrow keys, click dots, Prev/Next buttons, Esc to exit |
-
-In slideshow mode, every section overview, workflow, skill card, routine card, and artifact card becomes its own slide. The deck is built dynamically from the document, so any update to the guide automatically appears in both modes.
+```
+corwork_finance_guide/
+├── index.html                          # The full guide (website + slideshow)
+├── README.md                           # This file
+├── LICENSE
+├── skills/
+│   ├── slideshow-builder.skill         # Packaged skill — install in Claude Desktop
+│   └── slideshow-builder/
+│       ├── SKILL.md                    # Skill source (decomposition contract + agents)
+│       └── scripts/                    # Packaging and validation scripts
+└── .github/
+    └── workflows/
+        └── deploy.yml                  # GitHub Actions → GitHub Pages
+```
 
 ---
 
@@ -137,11 +157,12 @@ In slideshow mode, every section overview, workflow, skill card, routine card, a
 
 ---
 
-## Docs and Resources
+## Resources
 
 - [Claude Cowork documentation](https://support.claude.com)
 - [Financial services plugins](https://github.com/anthropics/financial-services)
 - [Claude Desktop download](https://claude.com/download)
+- [Agent skill best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)
 
 ---
 

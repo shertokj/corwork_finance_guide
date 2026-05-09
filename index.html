@@ -527,6 +527,143 @@
     margin: 0;
   }
 
+  /* ─── SKILL DOWNLOAD BLOCK ─── */
+  .skill-download-block {
+    background: var(--ink);
+    border-radius: 6px;
+    padding: 36px 40px;
+    margin: 36px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 36px;
+    flex-wrap: wrap;
+  }
+  .skill-download-text { flex: 1; min-width: 260px; }
+  .skill-download-text .sdk-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .skill-download-text .sdk-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 1px;
+    background: var(--gold);
+  }
+  .skill-download-text h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--paper);
+    margin: 0 0 12px;
+  }
+  .skill-download-text p {
+    font-size: 14px;
+    color: rgba(245,242,236,0.6);
+    line-height: 1.65;
+    margin: 0;
+  }
+  .skill-download-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+    flex-shrink: 0;
+  }
+  .btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--gold);
+    color: var(--ink);
+    border: none;
+    border-radius: 3px;
+    padding: 12px 24px;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+  .btn-download:hover { background: #d4b45a; }
+  .btn-download svg { flex-shrink: 0; }
+  .btn-github {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: transparent;
+    color: rgba(245,242,236,0.55);
+    border: 1px solid rgba(245,242,236,0.18);
+    border-radius: 3px;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .btn-github:hover { color: var(--paper); border-color: rgba(245,242,236,0.45); }
+  .skill-install-steps {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(245,242,236,0.1);
+  }
+  .skill-install-steps .sis-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+    opacity: 0.7;
+  }
+  .skill-install-step {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    margin-bottom: 10px;
+  }
+  .sis-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    background: rgba(200,168,75,0.12);
+    border: 1px solid rgba(200,168,75,0.25);
+    border-radius: 2px;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .sis-text {
+    font-size: 13px;
+    color: rgba(245,242,236,0.65);
+    line-height: 1.55;
+  }
+  .sis-text code {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--gold-light);
+    background: rgba(200,168,75,0.1);
+    padding: 1px 6px;
+    border-radius: 2px;
+  }
+
   /* ─── FOOTER ─── */
   .footer {
     background: var(--cream);
@@ -1324,6 +1461,7 @@
   <a href="#appendix-routines">Routines</a>
   <a href="#appendix-artifacts">Artifacts</a>
   <a href="#appendix-github">GitHub</a>
+  <a href="#appendix-slideshow-skill">Slideshow Skill</a>
 </nav>
 
 <!-- BODY -->
@@ -1763,7 +1901,10 @@
 
   <p>To create a skill, go to the Cowork tab, open your Finance Prospecting project, and select <strong>Project Settings → Skills → Add Skill</strong>. Paste the prompt below into the skill body, give it the name shown, and save. Claude will apply it from the next task onward.</p>
 
-  <!-- SKILL 1 -->
+  <div class="callout callout-tip">
+    <div class="callout-title">This Guide Was Built With a Skill</div>
+    <p>The slideshow mode you are reading was built and validated using the <strong>slideshow-builder</strong> skill: a custom Claude skill that enforces slide decomposition rules, runs three archetype agents (Skeptic, Writing Style, Presenter), and gates deployment on a set of automated checks. The skill is available to download from GitHub and install in Claude Desktop. See <a href="#appendix-slideshow-skill" style="color:var(--slate);">Appendix E</a> for details.</p>
+  </div>
   <div class="skill-card">
     <div class="skill-card-header">
       <span class="skill-badge">Skill 01</span>
@@ -2909,6 +3050,140 @@ Authentication: Use the GitHub credentials stored in project context. Never log,
   <div class="callout callout-tip">
     <div class="callout-title">On Compliance Review Before Publishing</div>
     <p>Any analysis page that will be shared with prospects should go through your firm's standard marketing and communications review process before the URL is distributed — the same process that governs any client-facing written communication. The fact that it is a webpage rather than a document does not change its regulatory character. Claude can flag each HTML page for review before pushing by adding a step: "Before committing this file to GitHub, save a copy to Prospecting/Compliance Review/[filename] in Google Drive and send me a Gmail asking me to confirm compliance clearance before the file goes live." Claude will then wait for your confirmation before executing the push.</p>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     APPENDIX E — SLIDESHOW BUILDER SKILL
+═══════════════════════════════════════════════════════════════ -->
+
+<div id="appendix-slideshow-skill" class="appendix-divider">
+  <div class="appendix-divider-eyebrow">Appendix E</div>
+  <h2>The <em>Slideshow Builder</em> Skill</h2>
+  <p>The skill used to build and validate this guide's dual-mode presentation, available to download, install in Claude Desktop, and apply to any HTML document you want to publish as both a website and a slideshow.</p>
+</div>
+
+<div class="appendix-body">
+
+  <p>This guide exists in two rendering modes: a scrollable website and a full-screen slideshow. That second mode was not written by hand. It was generated, validated, and corrected by a Claude skill called <strong>slideshow-builder</strong>, which encodes the rules for how content decomposes into slides and enforces them through an automated three-agent review loop before any version is published.</p>
+
+  <p>The skill is available on GitHub as a <code>.skill</code> file. Once installed in Claude Desktop, it activates automatically whenever you ask Claude to build or fix a slideshow mode on an HTML document. You do not invoke it manually; you describe what you want, and Claude applies the skill's decomposition rules, agent checks, and deployment gates without being asked.</p>
+
+  <div class="skill-download-block">
+    <div class="skill-download-text">
+      <div class="sdk-eyebrow">Download</div>
+      <h3>slideshow-builder.skill</h3>
+      <p>A packaged Claude skill that enforces slide decomposition rules, runs three archetype agents (Skeptic, Writing Style, Presenter), and gates GitHub deployment on eight automated checks. Compatible with Claude Desktop on macOS and Windows.</p>
+
+      <div class="skill-install-steps">
+        <div class="sis-label">Installation</div>
+        <div class="skill-install-step">
+          <div class="sis-num">1</div>
+          <div class="sis-text">Download <code>slideshow-builder.skill</code> from the button to the right or from the GitHub repository.</div>
+        </div>
+        <div class="skill-install-step">
+          <div class="sis-num">2</div>
+          <div class="sis-text">Open Claude Desktop. Go to <code>Settings → Customize → Skills</code>.</div>
+        </div>
+        <div class="skill-install-step">
+          <div class="sis-num">3</div>
+          <div class="sis-text">Click <code>Install from file</code> and select the downloaded <code>.skill</code> file.</div>
+        </div>
+        <div class="skill-install-step">
+          <div class="sis-num">4</div>
+          <div class="sis-text">The skill appears in your skills list and activates automatically on any slideshow-related task.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-download-actions">
+      <a class="btn-download" href="https://github.com/shertokj/corwork_finance_guide/raw/main/skills/slideshow-builder.skill" download="slideshow-builder.skill">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 2v8M5 7l3 3 3-3M2 11v1a2 2 0 002 2h8a2 2 0 002-2v-1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Download .skill
+      </a>
+      <a class="btn-github" href="https://github.com/shertokj/corwork_finance_guide" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+        </svg>
+        View on GitHub
+      </a>
+    </div>
+  </div>
+
+  <h3>What the Skill Does</h3>
+
+  <p>The slideshow-builder skill defines a decomposition contract: a fixed mapping from every content type (skill card, routine card, artifact card, workflow block, prose section, appendix divider) to an exact number of slides with specified content limits per slide. Every skill or routine card produces exactly two slides: a context slide with the header, metadata, and a single rationale paragraph; and a prompt slide that is a full-screen dark terminal containing only the prompt text and a copy button. No slide is allowed to require vertical scrolling on a standard display.</p>
+
+  <p>Before any HTML is pushed to GitHub, the skill runs three archetype agents against the built output. The Skeptic agent checks for duplicate function definitions, missing edge case guards, and structural integrity of the slide deck. The Writing Style agent scans every prose paragraph for em dashes, emoji in callout titles, hype words, rhetorical questions, and bullet lists in running text. The Presenter agent measures estimated content height per slide against the usable viewport and flags any slide that would overflow without scrolling. Only after all three agents report zero violations does the skill permit a push.</p>
+
+  <h3>How This Guide Was Validated</h3>
+
+  <p>The version you are reading passed the following checks before being published:</p>
+
+  <table class="pricing-table" style="margin-top:16px;">
+    <thead>
+      <tr>
+        <th>Agent</th>
+        <th>Check</th>
+        <th>Result</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Skeptic</td>
+        <td>17 function definitions — each exactly 1</td>
+        <td class="included">Pass</td>
+      </tr>
+      <tr>
+        <td>Skeptic</td>
+        <td>SS object defined once, no orphaned code</td>
+        <td class="included">Pass</td>
+      </tr>
+      <tr>
+        <td>Skeptic</td>
+        <td>All 5 CSS slide types present, edge case guards active</td>
+        <td class="included">Pass</td>
+      </tr>
+      <tr>
+        <td>Writing Style</td>
+        <td>Em dashes in prose paragraphs</td>
+        <td class="included">0 violations</td>
+      </tr>
+      <tr>
+        <td>Writing Style</td>
+        <td>Emoji in callout titles</td>
+        <td class="included">0 violations</td>
+      </tr>
+      <tr>
+        <td>Writing Style</td>
+        <td>Hype words, rhetorical questions, bullet lists</td>
+        <td class="included">0 violations</td>
+      </tr>
+      <tr>
+        <td>Presenter</td>
+        <td>Prompts over 500 words (require splitting)</td>
+        <td class="included">0 flagged</td>
+      </tr>
+      <tr>
+        <td>Presenter</td>
+        <td>Rationale paragraphs over 80 words</td>
+        <td class="included">0 flagged</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Applying the Skill to Your Own Documents</h3>
+
+  <p>Once installed, the skill works on any HTML document that uses the same component structure: skill cards, routine cards, artifact cards, workflow blocks, prompt blocks, and appendix dividers. If your document uses different class names, add a brief note to the skill's project context telling Claude the mapping between your class names and the decomposition contract's types. The skill handles the rest.</p>
+
+  <p>The skill's SKILL.md file is included in the <code>.skill</code> package and readable as plain text. It documents the full decomposition contract, the three agent definitions with their exact assertions, the build-test-remediate loop phases, and the remediation patterns for each failure mode. If you want to extend or modify the skill, edit the SKILL.md and repackage using the skill-creator scripts included in the repository.</p>
+
+  <div class="callout callout-tip">
+    <div class="callout-title">Repackaging the Skill</div>
+    <p>The GitHub repository includes the full <code>skills/slideshow-builder/</code> directory with SKILL.md and packaging scripts. To modify and repackage: edit <code>SKILL.md</code>, then run <code>python3 -m scripts.package_skill slideshow-builder</code> from the <code>skills/</code> directory. The packager validates the skill before creating a new <code>.skill</code> file.</p>
   </div>
 
 </div>
