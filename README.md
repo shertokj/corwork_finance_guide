@@ -8,7 +8,7 @@ Built on Claude Cowork GA, the February 2026 plugin expansion, and the May 2026 
 
 ## 📖 Live Guide
 
-**[View the guide →](https://shertokj.github.io/corwork_finance_guide/)**
+**[View the guide →](https://shertokj.github.io/cowork_finance_guide/)**
 
 The guide supports two viewing modes:
 - **Website mode** — full scrollable document with sticky navigation
