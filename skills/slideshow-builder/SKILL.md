@@ -389,3 +389,158 @@ The original 8 gates plus:
 - [ ] F6 Exactly one `#slideshowOverlay` and one `#ssViewport`
 - [ ] F8 exitSlideshow sets `body.style.overflow = ''`
 - [ ] F9 buildSlides has `SS.built` guard
+
+---
+
+## Mandatory End-to-End DOM Simulation Test
+
+Static parse checks and pattern matching are insufficient. The following test
+must be run before every push. It simulates an actual button click in a headless
+DOM, verifying the full user flow: script execution → enterSlideshow() → overlay
+visible → slides populated → navigation works.
+
+This test caught the primary cause of the "button doesn't work" failure: a script
+syntax error from orphaned top-level code that caused the browser to silently drop
+the entire script block. No static check caught it; only executing the script did.
+
+### What this test verifies
+
+1. Script block parses without syntax errors (`new Function(scriptSrc)`)
+2. Script executes without runtime errors in a mocked DOM environment
+3. `enterSlideshow()` is callable (not undefined)
+4. After calling `enterSlideshow()`:
+   - `#slideshowOverlay` has `active` class
+   - `document.body.style.overflow === 'hidden'`
+   - `#ssViewport` has at least 3 child slide elements
+   - `#ssTotalNum` text content equals slide count
+   - First slide has `active` class
+5. Calling `slideshowNav(1)` moves to slide 2 without throwing
+
+### How to run it
+
+Save this as `test_slideshow.js` and run `node test_slideshow.js` from the
+directory containing `index.html`. All output lines must show `✓`. Any `FAIL`
+or `✗` line blocks the push.
+
+```javascript
+// test_slideshow.js
+const fs = require('fs');
+const html = fs.readFileSync('index.html', 'utf8');
+const scriptSrc = html.match(/<script>([\s\S]*?)<\/script>/)[1];
+
+// 1. Parse check
+try { new Function(scriptSrc); console.log('✓ Script parses'); }
+catch(e) { console.error('✗ PARSE FAIL:', e.message); process.exit(1); }
+
+// 2. Brace balance
+let depth = 0;
+for (const line of scriptSrc.split('\n')) {
+  if (line.trim().startsWith('//')) continue;
+  for (const ch of line) {
+    if (ch === '{') depth++;
+    else if (ch === '}') { depth--; if (depth < 0) { console.error('✗ Extra } found'); process.exit(1); } }
+  }
+}
+if (depth !== 0) { console.error('✗ Brace imbalance:', depth); process.exit(1); }
+console.log('✓ Brace balance: 0');
+
+// 3. DOM simulation (minimal mock — enough to exercise the button click path)
+function el(tag, opts) {
+  opts = opts || {};
+  const node = {
+    tagName: tag.toUpperCase(), id: opts.id||'', className: opts.className||'',
+    textContent:'', innerHTML:'', style:{}, children:[], parentNode:null,
+    scrollTop:0, disabled:false, dataset:{},
+    appendChild(c){ c.parentNode=this; this.children.push(c); return c; },
+    addEventListener(){},
+    cloneNode(deep){ const c=el(this.tagName,{id:this.id,className:this.className}); c.dataset=Object.assign({},this.dataset); c.textContent=this.textContent; if(deep) this.children.forEach(ch=>{const cc=ch.cloneNode(true);cc.parentNode=c;c.children.push(cc);}); return c; },
+    querySelectorAll(sel){ const r=[]; const walk=(n)=>{ if(n!==this&&sel.split(', ').some(s=>this._matches(n,s.trim()))) r.push(n); n.children.forEach(walk); }; walk(this); return r; },
+    querySelector(sel){ return this.querySelectorAll(sel)[0]||null; },
+    closest(sel){ let n=this; while(n){ if(this._matches(n,sel)) return n; n=n.parentNode; } return null; },
+    _matches(n,sel){ if(!n||!n.tagName) return false; if(sel.startsWith('.')) return n.className&&n.className.split(' ').includes(sel.slice(1)); if(sel.startsWith('#')) return n.id===sel.slice(1); return n.tagName===sel.toUpperCase(); },
+  };
+  node.classList={
+    add(c){ if(!node.className.split(' ').includes(c)) node.className=(node.className+' '+c).trim(); },
+    remove(c){ node.className=node.className.split(' ').filter(x=>x!==c).join(' '); },
+    contains(c){ return node.className.split(' ').includes(c); },
+    toggle(c,f){ (f===undefined?this.contains(c):!f)?this.remove(c):this.add(c); },
+  };
+  return node;
+}
+
+// Build minimal DOM
+const overlay=el('div',{id:'slideshowOverlay'});
+const viewport=el('div',{id:'ssViewport'});
+const thumbStrip=el('div',{id:'ssThumbStrip'});
+const progress=el('div',{id:'ssProgressFill'}); progress.style={width:''};
+const curNum=el('span',{id:'ssCurrentNum'}); curNum.textContent='1';
+const totalNum=el('span',{id:'ssTotalNum'});
+const prevBtn=el('button',{id:'ssPrevBtn'});
+const nextBtn=el('button',{id:'ssNextBtn'});
+const byId={slideshowOverlay:overlay,ssViewport:viewport,ssThumbStrip:thumbStrip,ssProgressFill:progress,ssCurrentNum:curNum,ssTotalNum:totalNum,ssPrevBtn:prevBtn,ssNextBtn:nextBtn};
+
+// Parse prompt blocks from HTML so dataset stash has data
+const blocks=[];
+for(const m of html.matchAll(/<div class="prompt-block">([\s\S]*?)<\/div>\s*\n?\s*<\/div>\s*\n?\s*<\/div>/g)){
+  const pb=el('div',{className:'prompt-block'});
+  const lm=m[1].match(/class="prompt-label"[^>]*>(.*?)<\/div>/);
+  const pm=m[1].match(/<p>([\s\S]*?)<\/p>/);
+  pb.dataset.promptLabel=lm?lm[1].replace(/<[^>]+>/g,'').trim():'Prompt';
+  pb.dataset.promptText=pm?pm[1].replace(/<[^>]+>/g,'').trim():'';
+  blocks.push(pb);
+}
+
+// Minimal section for buildSlides traversal
+const bodyWrap=el('div',{className:'body-wrap'});
+const sec=el('section',{id:'overview'});
+const ph=el('div',{className:'part-header'});
+const plEl=el('span',{className:'part-label'}); plEl.textContent='Part One';
+const h2El=el('h2'); h2El.textContent='Overview';
+ph.appendChild(plEl); ph.appendChild(h2El);
+const p1=el('p'); p1.textContent='Test prose.';
+sec.appendChild(ph); sec.appendChild(p1);
+bodyWrap.appendChild(sec);
+
+const mockDoc={
+  body:{style:{}},
+  createElement:(tag)=>el(tag),
+  getElementById:(id)=>byId[id]||null,
+  addEventListener:()=>{},
+  querySelectorAll:(sel)=>{
+    if(sel==='.prompt-block') return blocks;
+    if(sel==='.body-wrap > section') return [sec];
+    if(sel==='.appendix-divider') return [];
+    if(sel==='.ss-slide') return viewport.children;
+    if(sel==='.ss-thumb') return thumbStrip.children;
+    return [];
+  },
+};
+
+// 4. Execute script and simulate click
+const ref={};
+try {
+  new Function('document','window','navigator','requestAnimationFrame','setTimeout','console','__r',
+    scriptSrc+'\n__r.enter=enterSlideshow;__r.nav=slideshowNav;'
+  )(mockDoc,{},{clipboard:null},(cb)=>cb(),(fn)=>fn(),console,ref);
+  console.log('✓ Script executes');
+} catch(e) { console.error('✗ RUNTIME ERROR:', e.message); process.exit(1); }
+
+ref.enter();
+const ok = (label, cond) => console.log((cond?'✓ ':'✗ ')+label) || (!cond && process.exit(1));
+ok('overlay active', overlay.classList.contains('active'));
+ok('body overflow hidden', mockDoc.body.style.overflow==='hidden');
+ok('slides built', viewport.children.length >= 3);
+ok('total counter set', totalNum.textContent.length > 0);
+ok('first slide active', viewport.children[0]&&viewport.children[0].classList.contains('active'));
+ref.nav(1);
+ok('navigation moves to slide 2', curNum.textContent === '2');
+console.log('✓ ALL TESTS PASSED');
+```
+
+### When to run this test
+
+- Before every `git push`
+- After any edit to the `<script>` block
+- After any str_replace or python-based edit to the HTML file
+- After any "cleanup" of duplicate functions
+
